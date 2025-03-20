@@ -8,7 +8,7 @@ funcaoComCorpo(){
 
 }
 
-se(a >= b a>b  c==a){
+se(a >= b || a>b && c==a && !b){
 
 } seNao {
 
