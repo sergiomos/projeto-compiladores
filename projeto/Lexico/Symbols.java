@@ -35,6 +35,9 @@ public class Symbols extends AFD {
             case ',':
                 code.next();
                 return new Token("VIRGULA", ",");
+            case ';':
+                code.next();
+                return new Token("PONTO_E_VIRGULA", ";");
 
             case CharacterIterator.DONE:
                 return new Token("EOF", "$");

@@ -2,24 +2,22 @@ package Lexico;
 
 import java.text.CharacterIterator;
 
-public class Reservado extends AFD {
+public class Reserved extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
     System.out.println("RESERVADO");
     String word = readWord(code);
 
     if (isTokenSeparator(code)) {
-      String type;
       switch (word) {
         case "se":
-          return new Token("CONDICAO_SE", word);
-        case "seNao":
-          return new Token("CONDICAO_SENAO", word);
+          return new Token("SE", word);
+        case "senao":
+          return new Token("SENAO", word);
         case "enquanto":
-          return new Token("LOOP_ENQUANTO", word);
+          return new Token("ENQUANTO", word);
         case "para":
-          return new Token("LOOP_PARA", word);
-
+          return new Token("PARA", word);
         default:
           return null;
       }

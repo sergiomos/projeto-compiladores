@@ -5,9 +5,6 @@ import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
-import Lexico.Reservado;
-import Lexico.Symbols;
-
 public class Lexer {
     private List<Token> tokens;
     private List<AFD> afds;
@@ -18,7 +15,8 @@ public class Lexer {
         afds = new ArrayList<>();
         this.code = new StringCharacterIterator(data);
         afds.add(new Symbols());
-        afds.add(new Reservado());
+        afds.add(new Reserved());
+        afds.add(new RelationalOperator());
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new Text());
