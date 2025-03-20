@@ -14,10 +14,11 @@ se(a >= b || a>b && c==a && !b){
 
 }
 
-para() {
+para(i = 0; i >= n; i += 1) {
   
 }
 
 enquanto(){
 
 }
+

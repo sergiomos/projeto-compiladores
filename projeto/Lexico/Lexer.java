@@ -18,6 +18,7 @@ public class Lexer {
         afds.add(new Reserved());
         afds.add(new RelationalOperator());
         afds.add(new LogicalOperator());
+        afds.add(new AssignOperator());
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new Text());
