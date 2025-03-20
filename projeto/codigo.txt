@@ -1,0 +1,6 @@
+inteiro 2
+decimal 2.3
+funcaoVazia()
+funcaoComParametros(a, b, c)
+string "Hello World"
+conta a + b / 10

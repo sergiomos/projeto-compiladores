@@ -5,6 +5,8 @@ import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
+import Lexico.Symbols;
+
 public class Lexer {
     private List<Token> tokens;
     private List<AFD> afds;
@@ -14,6 +16,7 @@ public class Lexer {
         tokens = new ArrayList<>();
         afds = new ArrayList<>();
         this.code = new StringCharacterIterator(data);
+        afds.add(new Symbols());
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new Text());

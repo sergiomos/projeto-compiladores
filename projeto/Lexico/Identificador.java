@@ -8,21 +8,18 @@ public class Identificador extends AFD {
     System.out.println("ID");
     String id = readID(code);
 
-    if (id == null)
-      return null;
+    if (isTokenSeparator(code)) {
+      return new Token("IDENTIFICADOR", id);
+    }
 
-    return new Token("IDENTIFICADOR", id);
+    return null;
   }
 
   public String readID(CharacterIterator code) {
 
-    if (Character.isLetter(code.current()) || code.current() == '_') {
+    if (isValidIDPrefix(code)) {
       String id = "";
-
       while (Character.isLetterOrDigit(code.current()) || code.current() == '_') {
-        if (isTokenSeparator(code))
-          break;
-
         id += code.current();
         code.next();
       }
@@ -31,6 +28,9 @@ public class Identificador extends AFD {
     }
 
     return null;
+  }
 
+  public boolean isValidIDPrefix(CharacterIterator code) {
+    return Character.isLetter(code.current()) || code.current() == '_';
   }
 }
