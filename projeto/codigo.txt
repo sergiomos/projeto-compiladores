@@ -4,3 +4,20 @@ funcaoVazia()
 funcaoComParametros(a, b, c)
 string "Hello World"
 conta a + b / 10
+funcaoComCorpo(){
+
+}
+
+se(){
+
+} seNao {
+
+}
+
+para() {
+  
+}
+
+enquanto(){
+
+}

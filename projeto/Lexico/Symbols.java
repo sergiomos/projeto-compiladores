@@ -16,6 +16,22 @@ public class Symbols extends AFD {
                 code.next();
                 return new Token("FECHA_PARENTESES", ")");
 
+            case '{':
+                code.next();
+                return new Token("ABRE_CHAVE", "{");
+
+            case '}':
+                code.next();
+                return new Token("FECHA_CHAVE", "}");
+
+            case '[':
+                code.next();
+                return new Token("ABRE_COLCHETE", "[");
+
+            case ']':
+                code.next();
+                return new Token("FECHA_COLCHETE", "]");
+
             case ',':
                 code.next();
                 return new Token("VIRGULA", ",");
