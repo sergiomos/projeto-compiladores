@@ -6,6 +6,7 @@ public class Text extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
+        System.out.println("TEXT");
         String str = readString(code);
 
         if (isTokenSeparator(code)) {
@@ -16,11 +17,24 @@ public class Text extends AFD {
     }
 
     private String readString(CharacterIterator code) {
-        String str = "";
+        String str = "\"";
 
-        while (Character.isLetter(code.current()) || code.current() == '"') {
+        if (code.current() == '"') {
+            code.next();
+        } else {
+            return null;
+        }
+
+        while (code.current() != '"') {
             str += code.current();
             code.next();
+        }
+
+        if (code.current() == '\"') {
+            str += "\"";
+            code.next();
+        } else {
+            return null;
         }
 
         return str;

@@ -1,10 +1,12 @@
 package Lexico;
+
 import java.text.CharacterIterator;
 
 public class MathOperator extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
+        System.out.println("MATH");
         switch (code.current()) {
             case '+':
                 code.next();

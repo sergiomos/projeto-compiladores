@@ -7,7 +7,7 @@ import Lexico.Token;
 public class Main {
     public static void main(String[] args) throws IOException {
         List<Token> tokens = null;
-        String data = "2.2 + 34 + \"teste\" 9";
+        String data = "2.2 + 34 + \"teste\" 9 \"sergiomos2010@gmail.com\" \"Hello World sa\" a variavel a1 _as a+b funcao()";
         Lexer lexer = new Lexer(data);
 
         tokens = lexer.getTokens();
