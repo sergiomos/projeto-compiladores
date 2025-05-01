@@ -6,7 +6,6 @@ public class Text extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
-        System.out.println("TEXT");
         String str = readString(code);
 
         if (isTokenSeparator(code)) {

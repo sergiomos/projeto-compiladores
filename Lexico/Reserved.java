@@ -5,7 +5,6 @@ import java.text.CharacterIterator;
 public class Reserved extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
-    System.out.println("RESERVADO");
     String word = readWord(code);
 
     if (isTokenSeparator(code)) {

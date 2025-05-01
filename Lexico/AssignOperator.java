@@ -3,24 +3,22 @@ package Lexico;
 import java.text.CharacterIterator;
 import java.util.ArrayList;
 
-public class LogicalOperator extends AFD {
+public class AssignOperator extends AFD {
 
   @Override
   public Token evaluate(CharacterIterator code) {
 
-    System.out.println("OPERADOR LOGICO");
-
     String operator = readOperador(code);
 
     switch (operator) {
-      case "&&":
-        return new Token("E_LOGICO", operator);
+      case "=":
+        return new Token("RECEBE", operator);
 
-      case "||":
-        return new Token("OU_LOGICO", operator);
+      case "+=":
+        return new Token("RECEBE_INC", operator);
 
-      case "!":
-        return new Token("NAO_LOGICO", operator);
+      case "-=":
+        return new Token("RECEBE_DEC", operator);
 
       default:
         return null;
@@ -41,10 +39,11 @@ public class LogicalOperator extends AFD {
 
   public boolean isOperator(CharacterIterator code) {
     ArrayList<Character> operators = new ArrayList<Character>();
-    operators.add('&');
-    operators.add('|');
-    operators.add('!');
+    operators.add('=');
+    operators.add('-');
+    operators.add('+');
 
     return operators.contains(code.current());
   }
+
 }

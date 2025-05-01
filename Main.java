@@ -6,20 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import Lexico.Lexer;
 import Lexico.Token;
+import Sintatico.Parser;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<Token> tokens = null;
         String data = readFile();
-
-        System.out.println(data);
         Lexer lexer = new Lexer(data);
+        List<Token> tokens = lexer.getTokens();
 
-        tokens = lexer.getTokens();
-
-        for (Token token : tokens) {
-            System.out.println(token);
-        }
+        Parser parser = new Parser(tokens);
+        parser.parser();
     }
 
     public static String readFile() throws FileNotFoundException, IOException {

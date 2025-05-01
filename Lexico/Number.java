@@ -6,7 +6,6 @@ public class Number extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
-        System.out.println("NUM");
         String number = readNumber(code);
         String type = "INT";
 

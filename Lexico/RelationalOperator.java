@@ -8,8 +8,6 @@ public class RelationalOperator extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
 
-    System.out.println("OPERADOR RELACIONAL");
-
     String operator = readOperador(code);
 
     switch (operator) {

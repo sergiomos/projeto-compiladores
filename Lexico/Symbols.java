@@ -6,7 +6,6 @@ public class Symbols extends AFD {
 
     @Override
     public Token evaluate(CharacterIterator code) {
-        System.out.println("SYM");
         switch (code.current()) {
             case '(':
                 code.next();

@@ -5,7 +5,6 @@ import java.text.CharacterIterator;
 public class Identificador extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
-    System.out.println("ID");
     String id = readID(code);
 
     if (isTokenSeparator(code)) {
