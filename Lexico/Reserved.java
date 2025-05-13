@@ -6,6 +6,7 @@ public class Reserved extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
     String word = readWord(code);
+    System.out.println(word);
 
     if (isTokenSeparator(code)) {
       switch (word) {
@@ -17,6 +18,14 @@ public class Reserved extends AFD {
           return new Token("ENQUANTO", word);
         case "para":
           return new Token("PARA", word);
+        case "int":
+          return new Token("INTEIRO", word);
+        case "dec":
+          return new Token("DECIMAL", word);
+        case "bool":
+          return new Token("BOOLEANO", word);
+        case "texto":
+          return new Token("TEXTO", word);
         default:
           return null;
       }

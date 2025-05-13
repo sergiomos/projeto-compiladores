@@ -14,6 +14,10 @@ public class Main {
         Lexer lexer = new Lexer(data);
         List<Token> tokens = lexer.getTokens();
 
+        for (Token i : tokens) {
+            System.out.println(i);
+          }
+
         Parser parser = new Parser(tokens);
         parser.parser();
     }
