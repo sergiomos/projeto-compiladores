@@ -14,7 +14,7 @@ public class Parser {
     public void parser() {
         currentToken = getNextToken();
         header();
-        if (declaracao()) {
+        if (bloco()) {
             if(matchT("EOF", footer())){
                 System.out.println("\nSintaticamente correta");
                 return;
@@ -33,12 +33,11 @@ public class Parser {
     }
 
     private void header() {
-        System.out.println("Public class Code{");
-        System.out.println("public static void main(String[]args){");
+        System.out.println("fn main() {");
     }
 
     private String footer() {
-        return "}\n}";
+        return "}";
     }
 
     private boolean matchL(String palavra, String newCode) {
@@ -62,22 +61,38 @@ public class Parser {
     private void traduz(String code) {
         System.out.print(code);
     }
+
+    private boolean bloco() {
+        return comando() && bloco() || true;
+    }
+
+    private boolean comando() {
+        return declaracao() ||
+        atribuicao();
+    }
     
+    private boolean id() {
+        return  matchT("IDENTIFICADOR", currentToken.getLexema() + " ");
+    }
+
+    private boolean fimDeLinha() {
+        return  matchL(";", "\n");
+    }
     // DECLARACAO -> TIPO ID "=" EXPRESSAO ";"
     private boolean declaracao() {
         return tipo() &&
-        matchT("IDENTIFICADOR", currentToken.getLexema() + " ") &&
+        id() &&
         matchL("=", "= ") &&
         expressao() &&
-        matchL(";", ";\n");
+        fimDeLinha();
     }
     
     // TIPO -> "txt" | "bool" | "int" | "dec"
     private boolean tipo() {
-        if (matchL("txt", "String ") || 
-            matchL("bool", "boolean ") || 
-            matchL("int", "int ") || 
-            matchL("dec", "double ")) {
+        if (matchL("texto", "let ") || 
+            matchL("bool", "let ") || 
+            matchL("int", "let ") || 
+            matchL("dec", "let ")) {
             return true;
         }
         return false;
@@ -85,21 +100,22 @@ public class Parser {
     
     // EXPRESSAO -> EXPR_ARITMETICA | EXPR_LOGICA | VALOR
     private boolean expressao() {
-        return expr_aritmetica() || expr_logica() || valor()
+        return expr_aritmetica() || expr_logica() || valor();
     }
     
     // VALOR -> ID | NUM | BOOLEAN
     private boolean valor() {
         return matchT("IDENTIFICADOR", currentToken.getLexema()) || 
             matchT("INT", currentToken.getLexema()) || 
-            matchT("DEC", currentToken.getLexema()) || 
-            boolean_valor()
+            matchT("FLOAT", currentToken.getLexema()) || 
+            matchT("STRING", currentToken.getLexema()) || 
+            boolean_valor();
     }
     
     // BOOLEAN -> "verdade" | "mentira"
     private boolean boolean_valor() {
         return matchL("verdade", "true") || 
-        matchL("mentira", "false")
+        matchL("mentira", "false");
     }
     
     // Placeholder methods for other expression types
@@ -114,5 +130,14 @@ public class Parser {
         // Implementation for logical expressions
         // For now, just check if it's a boolean value
         return boolean_valor();
+    }
+
+    private boolean op_atrib() {
+        return matchL("=", "= ") ||
+        matchL("+=", "+= ") ||
+        matchL("-=", "-= ");
+    }
+    private boolean atribuicao() {
+        return id() && op_atrib() && expressao() && fimDeLinha();
     }
 }
