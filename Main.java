@@ -16,10 +16,10 @@ public class Main {
 
         for (Token i : tokens) {
             System.out.println(i);
-          }
+        }
 
         Parser parser = new Parser(tokens);
-        parser.parser();
+        parser.parse();
     }
 
     public static String readFile() throws FileNotFoundException, IOException {
