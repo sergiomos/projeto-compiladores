@@ -3,3 +3,7 @@ dec b = 3.2;
 bool boleano = true;
 texto p = "texto";
 p = 2;
+
+def funcao() {
+
+}

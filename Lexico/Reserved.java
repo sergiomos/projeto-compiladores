@@ -26,6 +26,8 @@ public class Reserved extends AFD {
           return new Token("BOOLEANO", word);
         case "texto":
           return new Token("TEXTO", word);
+        case "def":
+          return new Token("FUNCAO", word);
         default:
           return null;
       }

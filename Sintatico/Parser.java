@@ -68,7 +68,8 @@ public class Parser {
 
     private boolean comando() {
         return declaracao() ||
-        atribuicao();
+        atribuicao() ||
+        funcao();
     }
     
     private boolean id() {
@@ -139,5 +140,9 @@ public class Parser {
     }
     private boolean atribuicao() {
         return id() && op_atrib() && expressao() && fimDeLinha();
+    }
+
+    private boolean funcao() {
+        return matchT("FUNCAO", "fn ") && id() && matchL("()")
     }
 }
