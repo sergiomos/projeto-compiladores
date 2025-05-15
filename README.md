@@ -86,7 +86,6 @@ PARA -> "para" "(" DECLARACAO ";" EXPR_LOGICA ";" PARA_AUX ")" BLOCO_ENCAPSULADO
 
 PARA_AUX ->  ATRIBUICAO | INCREMENTO
 
-para(int x = 0; x < 10; x+= 2){}
 
 ### Funçoes
 

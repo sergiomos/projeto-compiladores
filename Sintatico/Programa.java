@@ -14,6 +14,7 @@ public class Programa {
   protected boolean comando() {
     return parser.variaveis.declaracao()
         || parser.variaveis.atribuicao()
-        || parser.funcoes.funcao();
+        || parser.funcoes.funcao()
+        || parser.condicionais.se();
   }
 }

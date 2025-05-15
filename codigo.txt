@@ -7,3 +7,15 @@ p = 2;
 def funcao() {
  a = 2;
 }
+
+se(verdade) {
+  a = 3;
+  se(a) {
+    a = 0;
+  }
+} seNaoSe(mentira){
+  a = 2;
+}
+senao {
+  a = 1;
+}

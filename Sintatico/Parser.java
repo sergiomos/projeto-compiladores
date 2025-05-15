@@ -12,6 +12,7 @@ public class Parser {
     Elementos elementos;
     Expressao expressao;
     Funcoes funcoes;
+    Condicionais condicionais;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
@@ -21,6 +22,7 @@ public class Parser {
         this.elementos = new Elementos(this);
         this.expressao = new Expressao(this);
         this.funcoes = new Funcoes(this);
+        this.condicionais = new Condicionais(this);
     }
 
     public void parse() {

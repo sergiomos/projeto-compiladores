@@ -16,7 +16,9 @@ public class Expressao {
   }
 
   protected boolean expr_logica() {
-    return parser.elementos.boolean_valor() || parser.elementos.id();
+    return parser.elementos.boolean_valor()
+        || parser.elementos.id()
+        || parser.elementos.numero();
   }
 
   protected boolean valor() {
