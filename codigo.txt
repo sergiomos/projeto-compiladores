@@ -5,5 +5,5 @@ texto p = "texto";
 p = 2;
 
 def funcao() {
-
+ a = 2;
 }
