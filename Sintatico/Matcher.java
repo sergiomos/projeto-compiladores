@@ -9,6 +9,8 @@ public class Matcher {
 
   protected boolean matchL(String palavra) {
     if (parser.currentToken.getLexema().equals(palavra)) {
+      DerivationTree node = new DerivationTree("Token: " + parser.currentToken.getLexema());
+      parser.getDerivationTree().addChild(node);
       parser.currentToken = parser.getNextToken();
       return true;
     }
@@ -27,6 +29,9 @@ public class Matcher {
 
   protected boolean matchT(String type) {
     if (parser.currentToken.getType().equals(type)) {
+      DerivationTree node = new DerivationTree("Type: " + parser.currentToken.getType() +
+          " (" + parser.currentToken.getLexema() + ")");
+      parser.getDerivationTree().addChild(node);
       parser.currentToken = parser.getNextToken();
       return true;
     }

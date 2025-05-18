@@ -15,6 +15,7 @@ public class Programa {
     return parser.variaveis.declaracao()
         || parser.variaveis.atribuicao()
         || parser.funcoes.funcao()
-        || parser.condicionais.se();
+        || parser.condicionais.se()
+        || parser.reservado.evaluate();
   }
 }

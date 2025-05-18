@@ -29,4 +29,14 @@ public class Funcoes {
     return (parser.elementos.tipo() && parser.elementos.id())
         || true;
   }
+
+  protected boolean argumentos() {
+    return parser.expressao.valor()
+        && argumento() || true;
+  }
+
+  protected boolean argumento() {
+    return (parser.matcher.matchL(",", ", ") && argumentos())
+        || true;
+  }
 }

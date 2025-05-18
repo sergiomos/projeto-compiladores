@@ -10,7 +10,6 @@ public class Condicionais {
   protected boolean se() {
     return parser.matcher.matchT("SE", "if ")
         && parser.matcher.matchL("(", "(")
-        && parser.expressao.expr_logica()
         && parser.matcher.matchL(")", ")")
         && parser.matcher.matchL("{", "{\n")
         && parser.programa.bloco()
@@ -32,7 +31,6 @@ public class Condicionais {
   protected boolean senaoSe() {
     return parser.matcher.matchT("SENAOSE", "else if ")
         && parser.matcher.matchL("(", "(")
-        && parser.expressao.expr_logica()
         && parser.matcher.matchL(")", ")")
         && parser.matcher.matchL("{", "{\n")
         && parser.programa.bloco()

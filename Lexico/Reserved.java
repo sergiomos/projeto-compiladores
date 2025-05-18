@@ -34,6 +34,14 @@ public class Reserved extends AFD {
           return new Token("VERDADE", word);
         case "mentira":
           return new Token("MENTIRA", word);
+        case "escreva":
+          return new Token("ESCREVA", word);
+        case "leia":
+          return new Token("LEIA", word);
+        case "e":
+          return new Token("E_LOGICO", word);
+        case "ou":
+          return new Token("OU_LOGICO", word);
         default:
           return null;
       }

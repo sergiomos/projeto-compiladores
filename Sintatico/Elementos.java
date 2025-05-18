@@ -11,6 +11,10 @@ public class Elementos {
     return parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema());
   }
 
+  protected boolean id(String newCode) {
+    return parser.matcher.matchT("IDENTIFICADOR", newCode);
+  }
+
   protected boolean fimDeLinha() {
     return parser.matcher.matchL(";", "\n");
   }
@@ -46,8 +50,8 @@ public class Elementos {
   }
 
   protected boolean operadorLogico() {
-    return parser.matcher.matchL("e", "&&") ||
-        parser.matcher.matchL("ou", "||");
+    return parser.matcher.matchT("E_LOGICO", "&& ")
+        || parser.matcher.matchT("OU_LOGICO", "|| ");
   }
 
 }

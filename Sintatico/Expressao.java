@@ -9,7 +9,6 @@ public class Expressao {
 
   protected boolean expressao() {
     return operacao_matematica()
-        || expr_logica()
         || valor();
   }
 
@@ -49,36 +48,6 @@ public class Expressao {
         || ((parser.matcher.matchL("(", "(")
             && operacao_matematica()
             && parser.matcher.matchL(")", ")")));
-  }
-
-  protected boolean expr_logica() {
-    return true;
-    // return expr_relacional()
-    // && expr_logica_linha();
-  }
-
-  protected boolean expr_relacional() {
-    boolean valor = (operacao_matematica()
-        && parser.elementos.operadorRelacional()
-        && operacao_matematica())
-
-        || (parser.matcher.matchL("(", "(")
-            && expr_logica()
-            && parser.matcher.matchL(")", ")"))
-
-        || (parser.matcher.matchL("nao", "!")
-            && expr_logica())
-
-        || parser.elementos.boolean_valor();
-
-    return valor;
-  }
-
-  protected boolean expr_logica_linha() {
-    return (parser.elementos.operadorLogico()
-        && expr_relacional()
-        && expr_logica_linha())
-        || true;
   }
 
   protected boolean valor() {

@@ -1,13 +1,12 @@
-• Deve ter, no mínimo, 3 tipos de variáveis ✅
-• Deve ter a estrutura de controle if ... else; ✅
-• Deve possibilitar ifs encadeados ✅
-• Deve ter ao menos duas estruturas de repetição (while, do ... while, for); 
-• Deve possibilitar laços encadeados 
-• A parte de expressões envolvendo os operadores matemáticos deve ser realizada de maneira
-correta, respeitando a precedência. (sintático) ✅
-• As atribuições também devem ser realizadas; ✅
-• Os comandos de leitura do teclado (Scanner, secam, input, etc) e de impressão na tela (print) (léxico) devem ser disponibilizados.
-• O compilador tem que aceitar números decimais. ✅
-• O compilador deve ter mensagens de erros. (sintático)
-• A cada utilização de uma variável, é necessário verificar se ela já foi declarada. (semântico)
-• É necessário verificar se é possível realizar as operações, devido aos tipos das variáveis e ao seu escopo (semântico)
+- Deve ter, no mínimo, 3 tipos de variáveis ✅
+- Deve ter a estrutura de controle if ... else; ✅
+- Deve possibilitar ifs encadeados ✅
+- Deve ter ao menos duas estruturas de repetição (while, do ... while, for); 
+- Deve possibilitar laços encadeados 
+- A parte de expressões envolvendo os operadores matemáticos deve ser realizada de maneira correta, respeitando a precedência. (sintático) ✅
+- As atribuições também devem ser realizadas; ✅
+- Os comandos de leitura do teclado (Scanner, secam, input, etc) e de impressão na tela (print) (léxico) devem ser disponibilizados. ✅
+- O compilador tem que aceitar números decimais. ✅
+- O compilador deve ter mensagens de erros. (sintático)
+- A cada utilização de uma variável, é necessário verificar se ela já foi declarada. (semântico)
+- É necessário verificar se é possível realizar as operações, devido aos tipos das variáveis e ao seu escopo (semântico)
