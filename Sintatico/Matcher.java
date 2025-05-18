@@ -7,10 +7,11 @@ public class Matcher {
     this.parser = parser;
   }
 
-  protected boolean matchL(String palavra) {
+  protected boolean matchL(String palavra, Node father) {
+
     if (parser.currentToken.getLexema().equals(palavra)) {
-      DerivationTree node = new DerivationTree("Token: " + parser.currentToken.getLexema());
-      parser.getDerivationTree().addChild(node);
+
+      father.addNode(new Node(parser.currentToken.getLexema()));
       parser.currentToken = parser.getNextToken();
       return true;
     }
@@ -18,8 +19,8 @@ public class Matcher {
     return false;
   }
 
-  protected boolean matchL(String palavra, String newCode) {
-    if (matchL(palavra)) {
+  protected boolean matchL(String palavra, String newCode, Node father) {
+    if (matchL(palavra, father)) {
       traduz(newCode);
       return true;
     }
@@ -27,11 +28,10 @@ public class Matcher {
     return false;
   }
 
-  protected boolean matchT(String type) {
+  protected boolean matchT(String type, Node father) {
     if (parser.currentToken.getType().equals(type)) {
-      DerivationTree node = new DerivationTree("Type: " + parser.currentToken.getType() +
-          " (" + parser.currentToken.getLexema() + ")");
-      parser.getDerivationTree().addChild(node);
+
+      father.addNode(new Node(parser.currentToken.getLexema()));
       parser.currentToken = parser.getNextToken();
       return true;
     }
@@ -39,8 +39,8 @@ public class Matcher {
     return false;
   }
 
-  protected boolean matchT(String type, String newCode) {
-    if (matchT(type)) {
+  protected boolean matchT(String type, String newCode, Node father) {
+    if (matchT(type, father)) {
       traduz(newCode);
       return true;
     }

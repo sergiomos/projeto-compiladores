@@ -7,36 +7,69 @@ public class Funcoes {
     this.parser = parser;
   }
 
-  protected boolean funcao() {
-    return parser.matcher.matchT("FUNCAO", "fn ")
-        && parser.elementos.id()
-        && parser.matcher.matchL("(", "(")
-        && parametros()
-        && parser.matcher.matchL(")", ")")
-        && parser.matcher.matchL("{", "{\n")
-        && parser.programa.bloco()
-        && parser.matcher.matchL("}", "}");
+  protected boolean funcao(Node father) {
+    Node newFather = new Node("FUNCAO");
+
+    if (parser.matcher.matchT("FUNCAO", "fn ", newFather)
+        && parser.elementos.id(newFather)
+        && parser.matcher.matchL("(", "(", newFather)
+        && parametros(newFather)
+        && parser.matcher.matchL(")", ")", newFather)
+        && parser.matcher.matchL("{", "{\n", newFather)
+        && parser.programa.bloco(newFather)
+        && parser.matcher.matchL("}", "}", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  private boolean parametros() {
-    return parametro()
-        || (parametro()
-            && parser.matcher.matchL(",", ", ") && parametros());
+  private boolean parametros(Node father) {
+    Node newFather = new Node("PARAMETROS");
+
+    if (parametro(newFather)
+        || (parametro(newFather)
+            && parser.matcher.matchL(",", ", ", newFather) && parametros(newFather))) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
 
   }
 
-  private boolean parametro() {
-    return (parser.elementos.tipo() && parser.elementos.id())
-        || true;
+  private boolean parametro(Node father) {
+    Node newFather = new Node("PARAMETRO");
+
+    if (parser.elementos.tipo(newFather) && parser.elementos.id(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean argumentos() {
-    return parser.expressao.valor()
-        && argumento() || true;
+  protected boolean argumentos(Node father) {
+    Node newFather = new Node("ARGUMENTOS");
+
+    if (parser.expressao.valor(newFather)
+        && argumento(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean argumento() {
-    return (parser.matcher.matchL(",", ", ") && argumentos())
-        || true;
+  protected boolean argumento(Node father) {
+    Node newFather = new Node("ARGUMENTO");
+
+    if (parser.matcher.matchL(",", ", ", newFather) && argumentos(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 }

@@ -7,58 +7,117 @@ public class Elementos {
     this.parser = parser;
   }
 
-  protected boolean id() {
-    return parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema());
+  protected boolean id(Node father) {
+    Node newFather = new Node("IDENTIFICADOR");
+
+    if (parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema(), newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean id(String newCode) {
-    return parser.matcher.matchT("IDENTIFICADOR", newCode);
+  protected boolean fimDeLinha(Node father) {
+    Node newFather = new Node("FIM_DE_LINHA");
+
+    if (parser.matcher.matchL(";", "\n", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean fimDeLinha() {
-    return parser.matcher.matchL(";", "\n");
+  protected boolean numero(Node father) {
+    Node newFather = new Node("NUMERO");
+
+    if (parser.matcher.matchT("INT", parser.currentToken.getLexema(), newFather) ||
+        parser.matcher.matchT("FLOAT", parser.currentToken.getLexema(), newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean numero() {
-    return parser.matcher.matchT("INT", parser.currentToken.getLexema()) ||
-        parser.matcher.matchT("FLOAT", parser.currentToken.getLexema());
+  protected boolean tipo(Node father) {
+    Node newFather = new Node("TIPO");
+
+    if (parser.matcher.matchL("texto", newFather) ||
+        parser.matcher.matchL("bool", newFather) ||
+        parser.matcher.matchL("int", newFather) ||
+        parser.matcher.matchL("dec", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean tipo() {
-    return parser.matcher.matchL("texto") ||
-        parser.matcher.matchL("bool") ||
-        parser.matcher.matchL("int") ||
-        parser.matcher.matchL("dec");
+  protected boolean boolean_valor(Node father) {
+    Node newFather = new Node("BOOLEAN_VALUE");
+
+    if (parser.matcher.matchL("verdade", newFather) ||
+        parser.matcher.matchL("mentira", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean boolean_valor() {
-    return parser.matcher.matchL("verdade", "true") ||
-        parser.matcher.matchL("mentira", "false");
+  protected boolean texto(Node father) {
+    Node newFather = new Node("STRING");
+
+    if (parser.matcher.matchT("STRING", parser.currentToken.getLexema(), newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean texto() {
-    return parser.matcher.matchT("STRING", parser.currentToken.getLexema());
+  protected boolean operadorRelacional(Node father) {
+    Node newFather = new Node("OPERADOR_RELACIONAL");
+
+    if (parser.matcher.matchL("<", newFather) ||
+        parser.matcher.matchL(">", newFather) ||
+        parser.matcher.matchL("<=", "<= ", newFather) ||
+        parser.matcher.matchL(">=", ">= ", newFather) ||
+        parser.matcher.matchL("==", "== ", newFather) ||
+        parser.matcher.matchL("!=", "!= ", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean operadorRelacional() {
-    return parser.matcher.matchL("<", "<") ||
-        parser.matcher.matchL(">", ">") ||
-        parser.matcher.matchL("<=", "<=") ||
-        parser.matcher.matchL(">=", ">=") ||
-        parser.matcher.matchL("==", "==") ||
-        parser.matcher.matchL("!=", "!=");
+  protected boolean operadorLogico(Node father) {
+    Node newFather = new Node("OPERADOR_LOGICO");
+
+    if (parser.matcher.matchT("E_LOGICO", "&& ", newFather) ||
+        parser.matcher.matchT("OU_LOGICO", "|| ", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean operadorLogico() {
-    return parser.matcher.matchT("E_LOGICO", "&& ")
-        || parser.matcher.matchT("OU_LOGICO", "|| ");
-  }
+  protected boolean operadorAritmetico(Node father) {
+    Node newFather = new Node("OPERADOR_ARITMETICO");
 
-  protected boolean operadorArit() {
-    return parser.matcher.matchL("+", "+") ||
-        parser.matcher.matchL("-", "-") ||
-        parser.matcher.matchL("*", "*") ||
-        parser.matcher.matchL("/", "/");
+    if (parser.matcher.matchL("+", newFather) ||
+        parser.matcher.matchL("-", newFather) ||
+        parser.matcher.matchL("*", newFather) ||
+        parser.matcher.matchL("/", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
 }

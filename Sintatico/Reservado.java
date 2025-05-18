@@ -7,25 +7,39 @@ public class Reservado {
     this.parser = parser;
   }
 
-  protected boolean evaluate() {
-    return escreva() || leia();
+  protected boolean evaluate(Node father) {
+    return escreva(father) || leia(father);
   }
 
-  protected boolean escreva() {
-    return parser.matcher.matchT("ESCREVA", "println!")
-        && parser.matcher.matchL("(", "(")
-        && parser.funcoes.argumentos()
-        && parser.matcher.matchL(")", ")")
-        && parser.elementos.fimDeLinha();
+  protected boolean escreva(Node father) {
+    Node newFather = new Node("ESCREVA");
+
+    if (parser.matcher.matchT("ESCREVA", "println!", newFather)
+        && parser.matcher.matchL("(", "(", newFather)
+        && parser.funcoes.argumentos(newFather)
+        && parser.matcher.matchL(")", ")", newFather)
+        && parser.elementos.fimDeLinha(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean leia() {
-    return parser.matcher.matchT("LEIA", "std::io::stdin().read_line")
-        && parser.matcher.matchL("(", "(")
-        && parser.elementos.id("&mut")
-        && parser.matcher.matchL(")", ")")
-        && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n")
-        && parser.elementos.fimDeLinha();
+  protected boolean leia(Node father) {
+    Node newFather = new Node("LEIA");
+
+    if (parser.matcher.matchT("LEIA", "std::io::stdin().read_line", newFather)
+        && parser.matcher.matchL("(", "(", newFather)
+        && parser.elementos.id(newFather)
+        && parser.matcher.matchL(")", ")", newFather)
+        && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)
+        && parser.elementos.fimDeLinha(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
 }

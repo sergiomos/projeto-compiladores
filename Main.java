@@ -7,6 +7,8 @@ import java.io.IOException;
 import Lexico.Lexer;
 import Lexico.Token;
 import Sintatico.Parser;
+import Sintatico.Tree;
+import Semantico.SemanticAnalyzer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,7 +21,20 @@ public class Main {
         }
 
         Parser parser = new Parser(tokens);
-        parser.parse();
+        Tree tree = parser.parse();
+
+        if (tree != null) {
+            System.out.println("\nÁrvore de Derivação:");
+            tree.printTree();
+
+            // // Executa análise semântica
+            // SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer(derivationTree);
+            // if (semanticAnalyzer.analyze()) {
+            // System.out.println("\nAnálise semântica concluída com sucesso.");
+            // } else {
+            // semanticAnalyzer.printErrors();
+            // }
+        }
     }
 
     public static String readFile() throws FileNotFoundException, IOException {

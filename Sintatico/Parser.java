@@ -14,7 +14,8 @@ public class Parser {
     Funcoes funcoes;
     Condicionais condicionais;
     Reservado reservado;
-    private DerivationTree derivationTree;
+    Tree tree;
+    Node root;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;
@@ -26,22 +27,24 @@ public class Parser {
         this.funcoes = new Funcoes(this);
         this.condicionais = new Condicionais(this);
         this.reservado = new Reservado(this);
-        this.derivationTree = new DerivationTree("Program");
+        this.root = new Node("Raiz");
+        this.tree = new Tree(root);
     }
 
-    public void parse() {
+    public Tree parse() {
         currentToken = getNextToken();
         header();
-        if (programa.bloco()) {
-            if (matcher.matchT("EOF", footer())) {
+        if (programa.bloco(root)) {
+            if (currentToken.getType() == "EOF") {
+                footer();
                 System.out.println("\nSintaticamente correta");
-                System.out.println("\nÁrvore de Derivação:");
-                derivationTree.print();
-                return;
+                return tree;
             } else {
                 System.out.println("\nSintaticamente incorreta");
+                return null;
             }
         }
+        return null;
     }
 
     protected Token getNextToken() {
@@ -55,15 +58,11 @@ public class Parser {
         System.out.println("fn main() {");
     }
 
-    private String footer() {
-        return "}";
+    private void footer() {
+        System.out.println("}");
     }
 
     public String peekToken() {
         return matcher.toString();
-    }
-
-    public DerivationTree getDerivationTree() {
-        return derivationTree;
     }
 }

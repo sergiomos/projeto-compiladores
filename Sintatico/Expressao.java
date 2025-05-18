@@ -7,68 +7,130 @@ public class Expressao {
     this.parser = parser;
   }
 
-  protected boolean expressao() {
-    return operacao_matematica()
-        || valor();
+  protected boolean expressao(Node father) {
+    Node newFather = new Node("EXPRESSAO");
+
+    if (operacao_matematica(newFather)
+        || expressaoLogica(newFather)
+        || valor(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean expressao_teste() {
-    return (parser.elementos.id() && expressaoL())
-        || (parser.elementos.numero() && expressaoL())
-        || (parser.elementos.boolean_valor() && expressaoL())
-        || (parser.elementos.texto() && expressaoL());
+  protected boolean expressaoLogica(Node father) {
+    Node newFather = new Node("EXPRESSAO_LOGICA");
+
+    if (parser.elementos.id(newFather) && expressaoLogicaL(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean expressaoL() {
-    return (parser.elementos.operadorArit() && expressao_teste() && expressaoL())
-        || (parser.elementos.operadorRelacional() && expressao_teste() && expressaoL())
-        || (parser.elementos.operadorLogico() && expressao_teste() && expressaoL())
-        || true;
+  protected boolean expressaoLogicaL(Node father) {
+    Node newFather = new Node("EXPRESSAO_LOGICA_L");
+
+    if ((parser.elementos.operadorAritmetico(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
+        || (parser.elementos.operadorRelacional(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
+        || (parser.elementos.operadorLogico(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
+        || true) {
+      father.addNode(newFather);
+
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean operacao_matematica() {
-    return termo()
-        && expr_mat();
+  protected boolean operacao_matematica(Node father) {
+    Node newFather = new Node("OPERACAO_MAT");
+
+    if (termo(newFather)
+        && expr_mat(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean expr_mat() {
-    return (parser.matcher.matchL("+", "+")
-        && termo()
-        && expr_mat())
-        || (parser.matcher.matchL("-", "-")
-            && termo()
-            && expr_mat())
-        || true;
+  protected boolean expr_mat(Node father) {
+    Node newFather = new Node("EXPR_MAT");
+
+    if ((parser.matcher.matchL("+", "+", newFather)
+        && termo(newFather)
+        && expr_mat(newFather))
+        || (parser.matcher.matchL("-", "-", newFather)
+            && termo(newFather)
+            && expr_mat(newFather))
+        || true) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean termo() {
-    return fator()
-        && termo_linha();
+  protected boolean termo(Node father) {
+    Node newFather = new Node("TERMO");
+
+    if (fator(newFather)
+        && termo_linha(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean termo_linha() {
-    return (parser.matcher.matchL("*", "*")
-        && fator()
-        && termo_linha())
-        || ((parser.matcher.matchL("/", "/")
-            && fator()
-            && termo_linha()))
-        || true;
+  protected boolean termo_linha(Node father) {
+    Node newFather = new Node("TERMO_LINHA");
+
+    if ((parser.matcher.matchL("*", "*", newFather)
+        && fator(newFather)
+        && termo_linha(newFather))
+        || ((parser.matcher.matchL("/", "/", newFather)
+            && fator(newFather)
+            && termo_linha(newFather)))
+        || true) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean fator() {
-    return parser.elementos.numero()
-        || parser.elementos.id()
-        || ((parser.matcher.matchL("(", "(")
-            && operacao_matematica()
-            && parser.matcher.matchL(")", ")")));
+  protected boolean fator(Node father) {
+    Node newFather = new Node("FATOR");
+
+    if (parser.elementos.numero(newFather)
+        || parser.elementos.id(newFather)
+        || ((parser.matcher.matchL("(", "(", newFather)
+            && operacao_matematica(newFather)
+            && parser.matcher.matchL(")", ")", newFather)))) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean valor() {
-    return parser.elementos.numero()
-        || parser.elementos.id()
-        || parser.elementos.boolean_valor()
-        || parser.elementos.texto();
+  protected boolean valor(Node father) {
+    Node newFather = new Node("VALOR");
+
+    if (parser.elementos.numero(newFather)
+        || parser.elementos.id(newFather)
+        || parser.elementos.boolean_valor(newFather)
+        || parser.elementos.texto(newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
 }

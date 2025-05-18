@@ -7,34 +7,62 @@ public class Condicionais {
     this.parser = parser;
   }
 
-  protected boolean se() {
-    return parser.matcher.matchT("SE", "if ")
-        && parser.matcher.matchL("(", "(")
-        && parser.expressao.expressao_teste()
-        && parser.matcher.matchL(")", ")")
-        && parser.matcher.matchL("{", "{\n")
-        && parser.programa.bloco()
-        && parser.matcher.matchL("}", "}")
-        && seAux();
+  protected boolean se(Node father) {
+    Node newFather = new Node("SE");
+
+    if (parser.matcher.matchT("SE", "if ", newFather)
+        && parser.matcher.matchL("(", "(", newFather)
+        && parser.expressao.expressaoLogica(newFather)
+        && parser.matcher.matchL(")", ")", newFather)
+        && parser.matcher.matchL("{", "{\n", newFather)
+        && parser.programa.bloco(newFather)
+        && parser.matcher.matchL("}", "}", newFather)
+        && seAux(newFather)) {
+
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean seAux() {
-    return senao() || (senaoSe() && seAux()) || true;
+  protected boolean seAux(Node father) {
+    Node newFather = new Node("SE_AUX");
+
+    if (senao(newFather) || (senaoSe(newFather) && seAux(newFather)) || true) {
+      father.addNode(newFather);
+      return true;
+    }
+    return false;
   }
 
-  protected boolean senao() {
-    return parser.matcher.matchT("SENAO", "else ")
-        && parser.matcher.matchL("{", "{\n")
-        && parser.programa.bloco()
-        && parser.matcher.matchL("}", "}");
+  protected boolean senao(Node father) {
+    Node newFather = new Node("SENAO");
+
+    if (parser.matcher.matchT("SENAO", "else ", newFather)
+        && parser.matcher.matchL("{", "{\n", newFather)
+        && parser.programa.bloco(newFather)
+        && parser.matcher.matchL("}", "}", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 
-  protected boolean senaoSe() {
-    return parser.matcher.matchT("SENAOSE", "else if ")
-        && parser.matcher.matchL("(", "(")
-        && parser.matcher.matchL(")", ")")
-        && parser.matcher.matchL("{", "{\n")
-        && parser.programa.bloco()
-        && parser.matcher.matchL("}", "}");
+  protected boolean senaoSe(Node father) {
+    Node newFather = new Node("SENAOSE");
+
+    if (parser.matcher.matchT("SENAOSE", "else if ", newFather)
+        && parser.matcher.matchL("(", "(", newFather)
+        && parser.matcher.matchL(")", ")", newFather)
+        && parser.matcher.matchL("{", "{\n", newFather)
+        && parser.programa.bloco(newFather)
+        && parser.matcher.matchL("}", "}", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
   }
 }
