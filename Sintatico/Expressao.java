@@ -23,7 +23,12 @@ public class Expressao {
   protected boolean expressaoLogica(Node father) {
     Node newFather = new Node("EXPRESSAO_LOGICA");
 
-    if (parser.elementos.id(newFather) && expressaoLogicaL(newFather)) {
+    if ((parser.elementos.id(newFather) && expressaoLogicaL(newFather))
+        || (parser.elementos.numero(newFather) && expressaoLogicaL(newFather))
+        || (parser.elementos.boolean_valor(newFather) && expressaoLogicaL(newFather))
+        || (parser.elementos.texto(newFather) && expressaoLogicaL(newFather))
+        || (parser.matcher.matchL("(", "(", newFather) && expressaoLogica(newFather)
+            && parser.matcher.matchL(")", ")", newFather))) {
       father.addNode(newFather);
       return true;
     }
