@@ -12,6 +12,20 @@ public class Expressao {
         || valor();
   }
 
+  protected boolean expressao_teste() {
+    return (parser.elementos.id() && expressaoL())
+        || (parser.elementos.numero() && expressaoL())
+        || (parser.elementos.boolean_valor() && expressaoL())
+        || (parser.elementos.texto() && expressaoL());
+  }
+
+  protected boolean expressaoL() {
+    return (parser.elementos.operadorArit() && expressao_teste() && expressaoL())
+        || (parser.elementos.operadorRelacional() && expressao_teste() && expressaoL())
+        || (parser.elementos.operadorLogico() && expressao_teste() && expressaoL())
+        || true;
+  }
+
   protected boolean operacao_matematica() {
     return termo()
         && expr_mat();

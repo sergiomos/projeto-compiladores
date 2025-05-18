@@ -54,4 +54,11 @@ public class Elementos {
         || parser.matcher.matchT("OU_LOGICO", "|| ");
   }
 
+  protected boolean operadorArit() {
+    return parser.matcher.matchL("+", "+") ||
+        parser.matcher.matchL("-", "-") ||
+        parser.matcher.matchL("*", "*") ||
+        parser.matcher.matchL("/", "/");
+  }
+
 }
