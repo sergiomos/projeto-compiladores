@@ -28,12 +28,26 @@ public class Elementos {
   }
 
   protected boolean boolean_valor() {
-    return parser.matcher.matchL("verdade") ||
-        parser.matcher.matchL("mentira");
+    return parser.matcher.matchL("verdade", "true") ||
+        parser.matcher.matchL("mentira", "false");
   }
 
   protected boolean texto() {
     return parser.matcher.matchT("STRING", parser.currentToken.getLexema());
+  }
+
+  protected boolean operadorRelacional() {
+    return parser.matcher.matchL("<", "<") ||
+        parser.matcher.matchL(">", ">") ||
+        parser.matcher.matchL("<=", "<=") ||
+        parser.matcher.matchL(">=", ">=") ||
+        parser.matcher.matchL("==", "==") ||
+        parser.matcher.matchL("!=", "!=");
+  }
+
+  protected boolean operadorLogico() {
+    return parser.matcher.matchL("e", "&&") ||
+        parser.matcher.matchL("ou", "||");
   }
 
 }
