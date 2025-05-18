@@ -8,7 +8,6 @@ import Lexico.Lexer;
 import Lexico.Token;
 import Sintatico.Parser;
 import Sintatico.Tree;
-import Semantico.SemanticAnalyzer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,25 +15,30 @@ public class Main {
         Lexer lexer = new Lexer(data);
         List<Token> tokens = lexer.getTokens();
 
+        System.out.println("--------------- ANÁLISE LEXICA ---------------");
+
         for (Token i : tokens) {
+
             System.out.println(i);
         }
+
+        System.out.println("--------------- ANÁLISE SINTÁTICA ---------------");
 
         Parser parser = new Parser(tokens);
         Tree tree = parser.parse();
 
         if (tree != null) {
-            System.out.println("\nÁrvore de Derivação:");
+            System.out.println("--------------- ÁRVORE DE DERIVAÇÃO ---------------");
             tree.printTree();
-
-            // // Executa análise semântica
-            // SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer(derivationTree);
-            // if (semanticAnalyzer.analyze()) {
-            // System.out.println("\nAnálise semântica concluída com sucesso.");
-            // } else {
-            // semanticAnalyzer.printErrors();
-            // }
         }
+
+        // // Executa análise semântica
+        // SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer(derivationTree);
+        // if (semanticAnalyzer.analyze()) {
+        // System.out.println("\nAnálise semântica concluída com sucesso.");
+        // } else {
+        // semanticAnalyzer.printErrors();
+        // }
     }
 
     public static String readFile() throws FileNotFoundException, IOException {

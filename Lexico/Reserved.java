@@ -6,7 +6,6 @@ public class Reserved extends AFD {
   @Override
   public Token evaluate(CharacterIterator code) {
     String word = readWord(code);
-    System.out.println(word);
 
     if (isTokenSeparator(code)) {
       switch (word) {
