@@ -81,12 +81,12 @@ public class Elementos {
   protected boolean operadorRelacional(Node father) {
     Node newFather = new Node("OPERADOR_RELACIONAL");
 
-    if (parser.matcher.matchL("<", newFather) ||
-        parser.matcher.matchL(">", newFather) ||
-        parser.matcher.matchL("<=", "<= ", newFather) ||
-        parser.matcher.matchL(">=", ">= ", newFather) ||
-        parser.matcher.matchL("==", "== ", newFather) ||
-        parser.matcher.matchL("!=", "!= ", newFather)) {
+    if (parser.matcher.matchL("<", " < ", newFather) ||
+        parser.matcher.matchL(">", " > ", newFather) ||
+        parser.matcher.matchL("<=", " <= ", newFather) ||
+        parser.matcher.matchL(">=", " >= ", newFather) ||
+        parser.matcher.matchL("==", " == ", newFather) ||
+        parser.matcher.matchL("!=", " != ", newFather)) {
       father.addNode(newFather);
       return true;
     }

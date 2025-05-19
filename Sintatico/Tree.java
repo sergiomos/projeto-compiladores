@@ -46,4 +46,8 @@ public class Tree {
   public void printTree() {
     System.out.println(root.getTree());
   }
+
+  public Node getRoot() {
+    return root;
+  }
 }

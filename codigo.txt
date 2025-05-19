@@ -1,4 +1,10 @@
 int a = 2;
 se(a > a) {
-  
+  se(a == a) {
+    a = 2;
+  } senao {
+    a = 3;
+  }
 }
+
+int b = 2 + 1 / 44

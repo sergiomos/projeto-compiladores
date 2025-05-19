@@ -63,4 +63,8 @@ public class Node {
       }
     }
   }
+
+  public Node getNext() {
+    return nodes.remove(0);
+  }
 }
