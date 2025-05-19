@@ -1,6 +1,9 @@
 package Sintatico;
 
 import java.util.List;
+
+import javax.management.RuntimeErrorException;
+
 import Lexico.Token;
 
 public class Parser {
@@ -42,12 +45,14 @@ public class Parser {
                 System.out.println("\nSintaticamente correta");
                 return tree;
             } else {
-                System.out.println("\nSintaticamente incorreta");
+                System.out.println("\nSintaticamente incorreta ");
                 return null;
             }
         }
         return null;
     }
+
+
 
     protected Token getNextToken() {
         if (tokens.size() > 0) {

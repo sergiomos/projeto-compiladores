@@ -13,6 +13,8 @@ import Semantico.Analisador;
 public class Main {
     public static void main(String[] args) throws IOException {
         String data = readFile();
+        data = "int idade = 25; dec altura = 1.75; texto nome = \"João\"; bool ativo = verdade; idade += 5;contador++;int resultado = (10 + 5) * 2;dec media = (nota1 + nota2) / 2;int total = valor1 * valor2 + valor3;se (idade >= 18) {    texto status = \"maior de idade\";} senaose (idade >= 12) {    texto status = \"adolescente\";} senao {    texto status = \"criança\";}enquanto (contador < 10) {    contador++;}leia(a);escreva(\"a\", \"b\", c);def teste() {  int b = 2;}";
+                        
         Lexer lexer = new Lexer(data);
         List<Token> tokens = lexer.getTokens();
 

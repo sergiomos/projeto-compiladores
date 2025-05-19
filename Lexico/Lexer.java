@@ -58,6 +58,16 @@ public class Lexer {
     }
 
     public void error() {
-        throw new RuntimeException("Error: token not recognized: " + code.current());
+        StringBuilder contexto = new StringBuilder();
+        int pos = code.getIndex();
+        code.setIndex(Math.max(0, pos - 10));
+        for (int i = 0; i < 20 && code.current() != CharacterIterator.DONE; i++) {
+            contexto.append(code.current());
+            code.next();
+        }
+        code.setIndex(pos);
+        throw new RuntimeException("Erro léxico: token não reconhecido '" + code.current() +
+            "' na posição " + pos + "\nContexto: ..." + contexto.toString() + "...");
+
     }
 }
