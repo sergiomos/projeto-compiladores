@@ -29,6 +29,7 @@ public class Expressao {
         || (parser.elementos.texto(newFather) && expressaoLogicaL(newFather))
         || (parser.matcher.matchL("(", "(", newFather) && expressaoLogica(newFather)
             && parser.matcher.matchL(")", ")", newFather))) {
+
       father.addNode(newFather);
       return true;
     }

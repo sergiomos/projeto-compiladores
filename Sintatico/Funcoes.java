@@ -65,7 +65,7 @@ public class Funcoes {
   protected boolean argumento(Node father) {
     Node newFather = new Node("ARGUMENTO");
 
-    if (parser.matcher.matchL(",", ", ", newFather) && argumentos(newFather)) {
+    if ((parser.matcher.matchL(",", ", ", newFather) && argumentos(newFather)) || true) {
       father.addNode(newFather);
       return true;
     }

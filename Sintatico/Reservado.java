@@ -33,8 +33,7 @@ public class Reservado {
         && parser.matcher.matchL("(", "(", newFather)
         && parser.elementos.id(newFather)
         && parser.matcher.matchL(")", ")", newFather)
-        && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)
-        && parser.elementos.fimDeLinha(newFather)) {
+        && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)) {
       father.addNode(newFather);
       return true;
     }

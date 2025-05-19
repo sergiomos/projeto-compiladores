@@ -29,64 +29,18 @@ dec media = (nota1 + nota2) / 2;
 int total = valor1 * valor2 + valor3;
 ```
 
-### Expressões Lógicas
-```txt
-bool maior = idade > 18;
-bool valido = (idade >= 18) e (idade <= 65);
-bool aprovado = (nota >= 7) ou (frequencia >= 75);
-```
-
 ### Estruturas de Controle
 ```txt
 se (idade >= 18) {
-    txt status = "maior de idade";
+    texto status = "maior de idade";
 } senaose (idade >= 12) {
-    txt status = "adolescente";
+    texto status = "adolescente";
 } senao {
-    txt status = "criança";
+    texto status = "criança";
 }
 
 enquanto (contador < 10) {
     contador++;
-}
-
-para (int i = 0; i < 10; i++) {
-    escreva(i);
-}
-```
-
-### Funções
-```txt
-int func soma(int a, int b) {
-    int resultado = a + b;
-    retorna resultado;
-}
-
-dec func media(dec n1, dec n2) {
-    dec resultado = (n1 + n2) / 2;
-    retorna resultado;
-}
-
-txt func saudacao(txt nome) {
-    txt mensagem = "Olá, " + nome;
-    retorna mensagem;
-}
-```
-
-### Programa Completo
-```txt
-int func fatorial(int n) {
-    se (n <= 1) {
-        retorna 1;
-    }
-    retorna n * fatorial(n - 1);
-}
-
-int func main() {
-    int numero = 5;
-    int resultado = fatorial(numero);
-    escreva(resultado);
-    retorna 0;
 }
 ```
 
@@ -151,10 +105,6 @@ SE_AUX -> "senaose" CONDICAO_ENCAPSULADA BLOCO_ENCAPSULADO SE_AUX | "senao" BLOC
 REPETICAO -> ENQUANTO | PARA
 
 ENQUANTO -> "enquanto" EXPR_LOGICA_ENCAPSULADA BLOCO_ENCAPSULADO
-
-PARA -> "para" "(" DECLARACAO ";" EXPR_LOGICA ";" PARA_AUX ")" BLOCO_ENCAPSULADO
-
-PARA_AUX ->  ATRIBUICAO | INCREMENTO
 
 
 ### Funçoes

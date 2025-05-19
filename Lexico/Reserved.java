@@ -13,7 +13,7 @@ public class Reserved extends AFD {
           return new Token("SE", word);
         case "senao":
           return new Token("SENAO", word);
-        case "seNaoSe":
+        case "senaose":
           return new Token("SENAOSE", word);
         case "enquanto":
           return new Token("ENQUANTO", word);
