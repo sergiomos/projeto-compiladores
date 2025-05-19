@@ -26,7 +26,8 @@ public class Programa {
         || parser.funcoes.funcao(newFather)
         || parser.condicionais.se(newFather)
         || parser.reservado.evaluate(newFather)
-        || parser.lacos.enquanto(newFather)) {
+        || parser.lacos.enquanto(newFather)
+        || parser.lacos.doWhile(newFather)) {
       father.addNode(newFather);
       return true;
     }

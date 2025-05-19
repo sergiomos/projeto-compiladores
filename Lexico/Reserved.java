@@ -41,6 +41,8 @@ public class Reserved extends AFD {
           return new Token("E_LOGICO", word);
         case "ou":
           return new Token("OU_LOGICO", word);
+        case "execute":
+          return new Token("EXECUTE", word);
         default:
           return null;
       }

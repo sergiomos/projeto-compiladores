@@ -104,3 +104,5 @@ RETORNO -> "retorna" EXPRESSAO ";"
 ### Comandos de leitura e escrita
 
 ESCREVA -> escreva(ARGUMENTOS);
+
+EXECUTE -> "execute" "{" BLOCO "}" "enquanto" "(" EXPRESSAO_LOGICA ")"

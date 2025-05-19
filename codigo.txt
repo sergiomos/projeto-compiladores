@@ -18,3 +18,7 @@ se (a == b) {
 } seNaoSe(b < a) {
 
 } senao {}
+
+execute {
+ a = a - 2;
+} enquanto(a > 0)
