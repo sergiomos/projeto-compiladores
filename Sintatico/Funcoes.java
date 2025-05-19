@@ -28,9 +28,7 @@ public class Funcoes {
   private boolean parametros(Node father) {
     Node newFather = new Node("PARAMETROS");
 
-    if (parametro(newFather)
-        || (parametro(newFather)
-            && parser.matcher.matchL(",", ", ", newFather) && parametros(newFather))) {
+    if ((parser.elementos.id(newFather) && parametro(newFather)) || true) {
       father.addNode(newFather);
       return true;
     }
@@ -42,7 +40,8 @@ public class Funcoes {
   private boolean parametro(Node father) {
     Node newFather = new Node("PARAMETRO");
 
-    if (parser.elementos.tipo(newFather) && parser.elementos.id(newFather)) {
+    if ((parser.matcher.matchL(",", ", ", newFather)
+        && parser.elementos.id(newFather) && parametros(newFather) || true)) {
       father.addNode(newFather);
       return true;
     }

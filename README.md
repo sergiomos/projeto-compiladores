@@ -10,6 +10,44 @@
 
 ## Instruções de Execução
 
+### Pré-requisitos
+- Java JDK 17 ou superior
+- Maven (gerenciador de dependências)
+
+### Compilação
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/projeto-compiladores.git
+cd projeto-compiladores
+```
+
+2. Compile o projeto:
+```bash
+javac *.java
+```
+
+### Execução
+1. Para executar o compilador:
+```bash
+java Main
+```
+
+
+### Estrutura de Arquivos
+  - `Lexico/` - Analisador léxico
+  - `Sintatico/` - Analisador sintático
+  - `Semantico/` - Analisador semântico
+  - `codigo.txt`
+
+### Faça seu código em codigo.txt
+
+### Saída
+O compilador irá gerar:
+- Análise léxica: Lista de tokens encontrados
+- Análise sintática: Árvore de derivação
+- Análise semântica: Verificação de tipos e escopo
+- Código intermediário (se implementado)
+
 ## Exemplos de código
 
 ### Declaração e Atribuição de Variáveis
@@ -41,6 +79,13 @@ se (idade >= 18) {
 
 enquanto (contador < 10) {
     contador++;
+}
+```
+
+### FUNCOES
+```txt
+def teste() {
+  int b = 2;
 }
 ```
 

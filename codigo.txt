@@ -25,3 +25,7 @@ enquanto (contador < 10) {
 
 leia(a);
 escreva("a", "b", c);
+
+def teste() {
+  int b = 2;
+}
