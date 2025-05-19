@@ -12,3 +12,9 @@ int b = 2 + 1 / 44;
 enquanto(a > b) {
   a = a - 1;
 }
+
+se (a == b) {
+
+} seNaoSe(b < a) {
+
+} senao {}

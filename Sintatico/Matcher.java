@@ -48,7 +48,7 @@ public class Matcher {
     return false;
   }
 
-  private void traduz(String code) {
+  protected void traduz(String code) {
     System.out.print(code);
   }
 }
