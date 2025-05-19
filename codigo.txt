@@ -1,24 +1,15 @@
-int a = 2;
-se(a > a) {
-  se(a == a) {
-    a = 2;
-  } senao {
-    a = 3;
-  }
+se (idade >= 18) {
+    txt status = "maior de idade";
+} senaose (idade >= 12) {
+    txt status = "adolescente";
+} senao {
+    txt status = "criança";
 }
 
-int b = 2 + 1 / 44;
-
-enquanto(a > b) {
-  a = a - 1;
+enquanto (contador < 10) {
+    contador++;
 }
 
-se (a == b) {
-
-} seNaoSe(b < a) {
-
-} senao {}
-
-execute {
- a = a - 2;
-} enquanto(a > 0)
+para (int i = 0; i < 10; i++) {
+    escreva(i);
+}

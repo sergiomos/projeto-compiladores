@@ -58,8 +58,8 @@ public class Elementos {
   protected boolean boolean_valor(Node father) {
     Node newFather = new Node("BOOLEAN_VALUE");
 
-    if (parser.matcher.matchL("verdade", newFather) ||
-        parser.matcher.matchL("mentira", newFather)) {
+    if (parser.matcher.matchL("verdade", "true", newFather) ||
+        parser.matcher.matchL("mentira", "false", newFather)) {
       father.addNode(newFather);
       return true;
     }

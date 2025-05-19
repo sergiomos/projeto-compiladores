@@ -20,6 +20,12 @@ public class AssignOperator extends AFD {
       case "-=":
         return new Token("RECEBE_DEC", operator);
 
+      case "--":
+        return new Token("DECREMENTO", operator);
+
+      case "++":
+        return new Token("INCREMENTO", operator);
+
       default:
         return null;
     }
