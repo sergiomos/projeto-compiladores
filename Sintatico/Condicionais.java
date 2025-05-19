@@ -11,9 +11,9 @@ public class Condicionais {
     Node newFather = new Node("SE");
 
     if (parser.matcher.matchT("SE", "if ", newFather)
-        && parser.matcher.matchL("(", "(", newFather)
+        && parser.matcher.matchL("(", "", newFather)
         && parser.expressao.expressaoLogica(newFather)
-        && parser.matcher.matchL(")", ")", newFather)
+        && parser.matcher.matchL(")", "", newFather)
         && parser.matcher.matchL("{", "{\n", newFather)
         && parser.programa.bloco(newFather)
         && parser.matcher.matchL("}", "}", newFather)
@@ -42,7 +42,7 @@ public class Condicionais {
     if (parser.matcher.matchT("SENAO", "else ", newFather)
         && parser.matcher.matchL("{", "{\n", newFather)
         && parser.programa.bloco(newFather)
-        && parser.matcher.matchL("}", "}", newFather)) {
+        && parser.matcher.matchL("}", "}\n", newFather)) {
       father.addNode(newFather);
       return true;
     }

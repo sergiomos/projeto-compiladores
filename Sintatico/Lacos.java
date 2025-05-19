@@ -1,31 +1,36 @@
-// package Sintatico;
+package Sintatico;
 
-// public class Lacos {
-// private Parser parser;
+public class Lacos {
+  private Parser parser;
 
-// public Lacos(Parser parser) {
-// this.parser = parser;
-// }
+  public Lacos(Parser parser) {
+    this.parser = parser;
+  }
 
-// /*
-// * para (i=0; i < 10; i++) {
-// * bloco
-// * }
-// *
-// *
-// * for i in 0..10 {
-// * }
-// */
+  /*
+   * para (i=0; i < 10; i++) {
+   * bloco
+   * }
+   *
+   *
+   * for i in 0..10 {
+   * }
+   */
 
-// protected boolean para() {
-// return parser.matcher.matchT("para", "for ")
-// && parser.matcher.matchL("(", " ")
-// && parser.variaveis.declaracao()
-// // && parser.expressao.expr_logica()
-// && parser.matcher.matchL(")", ")")
-// && parser.matcher.matchL("{", "{\n")
-// && parser.programa.bloco()
-// && parser.matcher.matchL("}", "}");
-// }
+  protected boolean enquanto(Node father) {
+    Node newFather = new Node("ENQUANTO");
 
-// }
+    if (parser.matcher.matchT("ENQUANTO", "while ", newFather)
+        && parser.matcher.matchL("(", "", newFather)
+        && parser.expressao.expressaoLogica(newFather)
+        && parser.matcher.matchL(")", "", newFather)
+        && parser.matcher.matchL("{", "{\n", newFather)
+        && parser.programa.bloco(newFather)
+        && parser.matcher.matchL("}", "}", newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
+  }
+}

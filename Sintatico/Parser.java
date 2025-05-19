@@ -14,6 +14,7 @@ public class Parser {
     Funcoes funcoes;
     Condicionais condicionais;
     Reservado reservado;
+    Lacos lacos;
     Tree tree;
     Node root;
 
@@ -27,6 +28,7 @@ public class Parser {
         this.funcoes = new Funcoes(this);
         this.condicionais = new Condicionais(this);
         this.reservado = new Reservado(this);
+        this.lacos = new Lacos(this);
         this.root = new Node("Raiz");
         this.tree = new Tree(root);
     }
