@@ -10,9 +10,13 @@ public class Elementos {
   protected boolean id(Node father) {
     Node newFather = new Node("IDENTIFICADOR");
 
-    if (parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema(), newFather)) {
-      father.addNode(newFather);
-      return true;
+    if (parser.isInFirstSet("ID", parser.currentToken.getType())) {
+      if (parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema(), newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+
+      parser.error("identificador invalido -> " + parser.currentToken.getLexema());
     }
 
     return false;
@@ -21,11 +25,15 @@ public class Elementos {
   protected boolean fimDeLinha(Node father) {
     Node newFather = new Node("FIM_DE_LINHA");
 
-    if (parser.matcher.matchL(";", "\n", newFather)) {
-      father.addNode(newFather);
-      return true;
+    if (parser.isInFirstSet("PONTO_E_VIRGULA", parser.currentToken.getType())) {
+      if (parser.matcher.matchL(";", "\n", newFather) ) {
+        father.addNode(newFather);
+        return true;
+      }
+     
     }
 
+    parser.error("Adicione um ponto e virgula antes de -> " + parser.currentToken.getLexema());
     return false;
   }
 

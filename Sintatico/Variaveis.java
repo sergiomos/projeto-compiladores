@@ -12,20 +12,22 @@ public class Variaveis {
 
   protected boolean declaracao(Node father) {
     Node newFather = new Node("DECLARACAO");
+    if(parser.isInFirstSet("DECLARACAO", parser.currentToken.getType())){
 
-    if (new ArrayList<>(Arrays.asList("int", "texto", "dec", "bool", "string"))
-        .contains(parser.currentToken.getLexema())) {
       parser.matcher.traduz("let ");
-    }
+      
+      if (parser.elementos.tipo(newFather)
+      && parser.elementos.id(newFather)
+      && parser.matcher.matchT("RECEBE", "= ", newFather)
+      && parser.expressao.expressao(newFather)
+      && parser.elementos.fimDeLinha(newFather)
+      && parser.isInFollowSet("DECLARACAO", parser.currentToken.getType())) {
+        
+          father.addNode(newFather);
+          return true;
+      }
 
-    if (parser.elementos.tipo(newFather)
-        && parser.elementos.id(newFather)
-        && parser.matcher.matchT("RECEBE", "= ", newFather)
-        && parser.expressao.expressao(newFather)
-        && parser.elementos.fimDeLinha(newFather)) {
-
-      father.addNode(newFather);
-      return true;
+      parser.error("declaraçao invalida -> " + parser.currentToken.getLexema());
     }
 
     return false;
@@ -34,10 +36,15 @@ public class Variaveis {
   protected boolean atribuicao(Node father) {
     Node newFather = new Node("ATRIBUICAO");
 
-    if (parser.elementos.id(newFather)
-        && aux(newFather)) {
-      father.addNode(newFather);
-      return true;
+    if(parser.isInFirstSet("ATRIBUICAO", parser.currentToken.getType())){
+      if (parser.elementos.id(newFather)
+          && aux(newFather)
+          && parser.isInFollowSet("ATRIBUICAO", parser.currentToken.getType())) {
+        father.addNode(newFather);
+        return true;
+      }
+
+      parser.error("atribuição invalida -> " + parser.currentToken.getLexema());
     }
 
     return false;
@@ -46,12 +53,16 @@ public class Variaveis {
   private boolean op_atrib(Node father) {
     Node newFather = new Node("OP_ATRIB");
 
-    if (parser.matcher.matchL("=", "= ", newFather) ||
-        parser.matcher.matchL("+=", "+= ", newFather) ||
-        parser.matcher.matchL("-=", "-= ", newFather)) {
-      father.addNode(newFather);
+    if(parser.isInFirstSet("OP_ATRIB", parser.currentToken.getType())){
+      if ((parser.matcher.matchL("=", "= ", newFather) ||
+          parser.matcher.matchL("+=", "+= ", newFather) ||
+          parser.matcher.matchL("-=", "-= ", newFather))
+          && parser.isInFollowSet("OP_ATRIB", parser.currentToken.getType())) {
+        father.addNode(newFather);
+        return true;
+      }
 
-      return true;
+      parser.error("operador de atribuição invalido -> " + parser.currentToken.getLexema());
     }
 
     return false;
@@ -73,12 +84,18 @@ public class Variaveis {
   protected boolean incremento(Node father) {
     Node newFather = new Node("INCREMENTO");
 
-    if ((parser.matcher.matchT("INCREMENTO", " += 1", newFather)
+    if(parser.isInFirstSet("INCREMENTO", parser.currentToken.getType())){
+      
+      if (((parser.matcher.matchT("INCREMENTO", " += 1", newFather)
         && parser.elementos.fimDeLinha(newFather)) ||
         (parser.matcher.matchT("DECREMENTO", " -= 1", newFather)
-            && parser.elementos.fimDeLinha(newFather))) {
-      father.addNode(newFather);
-      return true;
+            && parser.elementos.fimDeLinha(newFather)))
+            && parser.isInFollowSet("INCREMENTO", parser.currentToken.getType())) {
+        father.addNode(newFather);
+        return true;
+      }
+
+      parser.error("incremento invalido -> " + parser.currentToken.getLexema());
     }
 
     return false;

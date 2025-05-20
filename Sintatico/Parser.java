@@ -143,6 +143,10 @@ public class Parser {
                 return FirstFollowSets.FIRST_ESCREVA.contains(token);
             case "EXECUTE":
                 return FirstFollowSets.FIRST_EXECUTE.contains(token);
+            case "OP_ATRIB":
+                return FirstFollowSets.FIRST_OP_ATRIB.contains(token);
+            case "PONTO_E_VIRGULA":
+                return FirstFollowSets.FIRST_PONTO_E_VIRGULA.contains(token);
             default:
                 return false;
         }
@@ -220,8 +224,14 @@ public class Parser {
                 return FirstFollowSets.FOLLOW_ESCREVA.contains(token);
             case "EXECUTE":
                 return FirstFollowSets.FOLLOW_EXECUTE.contains(token);
+            case "OP_ATRIB":
+                return FirstFollowSets.FOLLOW_OP_ATRIB.contains(token);
             default:
                 return false;
         }
+    }
+
+    public void error(String message) {
+        throw new RuntimeException("Erro de sintaxe: " + message);
     }
 }
