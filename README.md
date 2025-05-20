@@ -173,3 +173,43 @@ RETORNO -> "retorna" EXPRESSAO ";"
 ESCREVA -> escreva(ARGUMENTOS);
 
 EXECUTE -> "execute" "{" BLOCO "}" "enquanto" "(" EXPRESSAO_LOGICA ")"
+
+## First and Follow Sets
+
+| Rule | First Set | Follow Set |
+|------|-----------|------------|
+| PROGRAMA | {BLOCO} | {$} |
+| BLOCO | {COMANDO, ε} | {EOF} |
+| COMANDO | {DECISAO, DECLARACAO, REPETICAO, ATRIBUICAO, FUNCAO, INCREMENTO} | {COMANDO, EOF} |
+| DECLARACAO | {TIPO} | {COMANDO, EOF} |
+| ATRIBUICAO | {ID} | {COMANDO, EOF} |
+| INCREMENTO | {ID} | {COMANDO, EOF} |
+| TIPO | {texto, bool, int, dec} | {ID} |
+| ID | {[a-zA-Z]} | {=, +=, -=, ++, --, ;, ), ,} |
+| NUM | {[0-9]} | {;, ), ,, +, -, *, /, >, <, ==, <=, >=, !=} |
+| BOOLEAN | {verdade, mentira} | {;, ), ,, >, <, ==, <=, >=, !=} |
+| VALOR | {ID, NUM, BOOLEAN} | {;, ), ,, +, -, *, /, >, <, ==, <=, >=, !=} |
+| EXPRESSAO | {ID, NUM, BOOLEAN, (} | {;, ), ,} |
+| OPERACAO_MATEMATICA | {ID, NUM, (} | {;, ), ,, >, <, ==, <=, >=, !=} |
+| EXPR_MAT | {+, -, ε} | {;, ), ,, >, <, ==, <=, >=, !=} |
+| TERMO | {ID, NUM, (} | {;, ), ,, +, -, >, <, ==, <=, >=, !=} |
+| TERMO' | {*, /, ε} | {;, ), ,, +, -, >, <, ==, <=, >=, !=} |
+| FATOR | {ID, NUM, (} | {;, ), ,, +, -, *, /, >, <, ==, <=, >=, !=} |
+| EXPRESSAO_LOGICA | {ID, NUM, BOOLEAN, (} | {;, ), ,} |
+| EXPRESSAO_LOGICA' | {OPERADOR_ARITIMETICO, OPERADOR_RELACIONAL, OPERADOR_LOGICO, ε} | {;, ), ,} |
+| OPERADOR_ARITIMETICO | {+, -, *, /} | {ID, NUM, BOOLEAN, (} |
+| OPERADOR_RELACIONAL | {>, <, ==, <=, >=, !=} | {ID, NUM, BOOLEAN, (} |
+| OPERADOR_LOGICO | {ou, e} | {ID, NUM, BOOLEAN, (} |
+| SE | {se} | {COMANDO, EOF} |
+| SE_AUX | {senaose, senao, ε} | {COMANDO, EOF} |
+| REPETICAO | {enquanto, para} | {COMANDO, EOF} |
+| ENQUANTO | {enquanto} | {COMANDO, EOF} |
+| FUNCAO | {fn} | {COMANDO, EOF} |
+| PARAMETROS | {TIPO, ε} | {)} |
+| PARAMETRO | {TIPO, ε} | {,, )} |
+| CHAMADA_FUNCAO | {ID} | {;, ), ,} |
+| ARGUMENTOS | {VALOR} | {)} |
+| ARGUMENTO | {,, ε} | {)} |
+| RETORNO | {retorna} | {}} |
+| ESCREVA | {escreva} | {COMANDO, EOF} |
+| EXECUTE | {execute} | {COMANDO, EOF} |

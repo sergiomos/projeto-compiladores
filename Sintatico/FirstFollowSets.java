@@ -1,0 +1,81 @@
+package Sintatico;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+public class FirstFollowSets {
+    // First Sets
+    public static final Set<String> FIRST_PROGRAMA = new HashSet<>(Arrays.asList("BLOCO"));
+    public static final Set<String> FIRST_BLOCO = new HashSet<>(Arrays.asList("COMANDO", "ε"));
+    public static final Set<String> FIRST_COMANDO = new HashSet<>(Arrays.asList("DECISAO", "DECLARACAO", "REPETICAO", "ATRIBUICAO", "FUNCAO", "INCREMENTO"));
+    public static final Set<String> FIRST_DECLARACAO = new HashSet<>(Arrays.asList("TIPO"));
+    public static final Set<String> FIRST_ATRIBUICAO = new HashSet<>(Arrays.asList("ID"));
+    public static final Set<String> FIRST_INCREMENTO = new HashSet<>(Arrays.asList("ID"));
+    public static final Set<String> FIRST_TIPO = new HashSet<>(Arrays.asList("texto", "bool", "int", "dec"));
+    public static final Set<String> FIRST_ID = new HashSet<>(Arrays.asList("[a-zA-Z]"));
+    public static final Set<String> FIRST_NUM = new HashSet<>(Arrays.asList("[0-9]"));
+    public static final Set<String> FIRST_BOOLEAN = new HashSet<>(Arrays.asList("verdade", "mentira"));
+    public static final Set<String> FIRST_VALOR = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN"));
+    public static final Set<String> FIRST_EXPRESSAO = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN", "("));
+    public static final Set<String> FIRST_OPERACAO_MATEMATICA = new HashSet<>(Arrays.asList("ID", "NUM", "("));
+    public static final Set<String> FIRST_EXPR_MAT = new HashSet<>(Arrays.asList("+", "-", "ε"));
+    public static final Set<String> FIRST_TERMO = new HashSet<>(Arrays.asList("ID", "NUM", "("));
+    public static final Set<String> FIRST_TERMO_LINHA = new HashSet<>(Arrays.asList("*", "/", "ε"));
+    public static final Set<String> FIRST_FATOR = new HashSet<>(Arrays.asList("ID", "NUM", "("));
+    public static final Set<String> FIRST_EXPRESSAO_LOGICA = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN", "("));
+    public static final Set<String> FIRST_EXPRESSAO_LOGICA_L = new HashSet<>(Arrays.asList("OPERADOR_ARITIMETICO", "OPERADOR_RELACIONAL", "OPERADOR_LOGICO", "ε"));
+    public static final Set<String> FIRST_OPERADOR_ARITIMETICO = new HashSet<>(Arrays.asList("+", "-", "*", "/"));
+    public static final Set<String> FIRST_OPERADOR_RELACIONAL = new HashSet<>(Arrays.asList(">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FIRST_OPERADOR_LOGICO = new HashSet<>(Arrays.asList("ou", "e"));
+    public static final Set<String> FIRST_SE = new HashSet<>(Arrays.asList("se"));
+    public static final Set<String> FIRST_SE_AUX = new HashSet<>(Arrays.asList("senaose", "senao", "ε"));
+    public static final Set<String> FIRST_REPETICAO = new HashSet<>(Arrays.asList("enquanto", "para"));
+    public static final Set<String> FIRST_ENQUANTO = new HashSet<>(Arrays.asList("enquanto"));
+    public static final Set<String> FIRST_FUNCAO = new HashSet<>(Arrays.asList("fn"));
+    public static final Set<String> FIRST_PARAMETROS = new HashSet<>(Arrays.asList("TIPO", "ε"));
+    public static final Set<String> FIRST_PARAMETRO = new HashSet<>(Arrays.asList("TIPO", "ε"));
+    public static final Set<String> FIRST_CHAMADA_FUNCAO = new HashSet<>(Arrays.asList("ID"));
+    public static final Set<String> FIRST_ARGUMENTOS = new HashSet<>(Arrays.asList("VALOR"));
+    public static final Set<String> FIRST_ARGUMENTO = new HashSet<>(Arrays.asList(",", "ε"));
+    public static final Set<String> FIRST_RETORNO = new HashSet<>(Arrays.asList("retorna"));
+    public static final Set<String> FIRST_ESCREVA = new HashSet<>(Arrays.asList("escreva"));
+    public static final Set<String> FIRST_EXECUTE = new HashSet<>(Arrays.asList("execute"));
+
+    // Follow Sets
+    public static final Set<String> FOLLOW_PROGRAMA = new HashSet<>(Arrays.asList("$"));
+    public static final Set<String> FOLLOW_BLOCO = new HashSet<>(Arrays.asList("EOF"));
+    public static final Set<String> FOLLOW_COMANDO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_DECLARACAO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_ATRIBUICAO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_INCREMENTO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_TIPO = new HashSet<>(Arrays.asList("ID"));
+    public static final Set<String> FOLLOW_ID = new HashSet<>(Arrays.asList("=", "+=", "-=", "++", "--", ";", ")", ","));
+    public static final Set<String> FOLLOW_NUM = new HashSet<>(Arrays.asList(";", ")", ",", "+", "-", "*", "/", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_BOOLEAN = new HashSet<>(Arrays.asList(";", ")", ",", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_VALOR = new HashSet<>(Arrays.asList(";", ")", ",", "+", "-", "*", "/", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_EXPRESSAO = new HashSet<>(Arrays.asList(";", ")", ","));
+    public static final Set<String> FOLLOW_OPERACAO_MATEMATICA = new HashSet<>(Arrays.asList(";", ")", ",", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_EXPR_MAT = new HashSet<>(Arrays.asList(";", ")", ",", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_TERMO = new HashSet<>(Arrays.asList(";", ")", ",", "+", "-", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_TERMO_LINHA = new HashSet<>(Arrays.asList(";", ")", ",", "+", "-", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_FATOR = new HashSet<>(Arrays.asList(";", ")", ",", "+", "-", "*", "/", ">", "<", "==", "<=", ">=", "!="));
+    public static final Set<String> FOLLOW_EXPRESSAO_LOGICA = new HashSet<>(Arrays.asList(";", ")", ","));
+    public static final Set<String> FOLLOW_EXPRESSAO_LOGICA_L = new HashSet<>(Arrays.asList(";", ")", ","));
+    public static final Set<String> FOLLOW_OPERADOR_ARITIMETICO = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN", "("));
+    public static final Set<String> FOLLOW_OPERADOR_RELACIONAL = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN", "("));
+    public static final Set<String> FOLLOW_OPERADOR_LOGICO = new HashSet<>(Arrays.asList("ID", "NUM", "BOOLEAN", "("));
+    public static final Set<String> FOLLOW_SE = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_SE_AUX = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_REPETICAO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_ENQUANTO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_FUNCAO = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_PARAMETROS = new HashSet<>(Arrays.asList(")"));
+    public static final Set<String> FOLLOW_PARAMETRO = new HashSet<>(Arrays.asList(",", ")"));
+    public static final Set<String> FOLLOW_CHAMADA_FUNCAO = new HashSet<>(Arrays.asList(";", ")", ","));
+    public static final Set<String> FOLLOW_ARGUMENTOS = new HashSet<>(Arrays.asList(")"));
+    public static final Set<String> FOLLOW_ARGUMENTO = new HashSet<>(Arrays.asList(")"));
+    public static final Set<String> FOLLOW_RETORNO = new HashSet<>(Arrays.asList("}"));
+    public static final Set<String> FOLLOW_ESCREVA = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+    public static final Set<String> FOLLOW_EXECUTE = new HashSet<>(Arrays.asList("COMANDO", "EOF"));
+} 
