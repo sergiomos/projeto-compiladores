@@ -29,13 +29,17 @@ public class Reservado {
   protected boolean leia(Node father) {
     Node newFather = new Node("LEIA");
 
+    if(parser.isInFirstSet("LEIA", parser.currentToken.getType())){
     if (parser.matcher.matchT("LEIA", "std::io::stdin().read_line", newFather)
         && parser.matcher.matchL("(", "(", newFather)
-        && parser.elementos.id(newFather)
+        && parser.elementos.id(newFather, "&" + parser.currentToken.getLexema())
         && parser.matcher.matchL(")", ")", newFather)
         && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)) {
-      father.addNode(newFather);
-      return true;
+        father.addNode(newFather);
+        return true;
+      }
+
+      parser.error("leia invalido -> " + parser.currentToken.getLexema());
     }
 
     return false;

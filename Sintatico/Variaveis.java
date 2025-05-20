@@ -1,7 +1,5 @@
 package Sintatico;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Variaveis {
   private Parser parser;
@@ -21,7 +19,7 @@ public class Variaveis {
       && parser.matcher.matchT("RECEBE", "= ", newFather)
       && parser.expressao.expressao(newFather)
       && parser.elementos.fimDeLinha(newFather)
-      && parser.isInFollowSet("DECLARACAO", parser.currentToken.getType())) {
+    ) {
         
           father.addNode(newFather);
           return true;
@@ -53,16 +51,12 @@ public class Variaveis {
   private boolean op_atrib(Node father) {
     Node newFather = new Node("OP_ATRIB");
 
-    if(parser.isInFirstSet("OP_ATRIB", parser.currentToken.getType())){
       if ((parser.matcher.matchL("=", "= ", newFather) ||
           parser.matcher.matchL("+=", "+= ", newFather) ||
           parser.matcher.matchL("-=", "-= ", newFather))
-          && parser.isInFollowSet("OP_ATRIB", parser.currentToken.getType())) {
+         ) {
         father.addNode(newFather);
         return true;
-      }
-
-      parser.error("operador de atribuição invalido -> " + parser.currentToken.getLexema());
     }
 
     return false;

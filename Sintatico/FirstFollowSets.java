@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class FirstFollowSets {
     // First Sets
+    public static final Set<String> FIRST_LEIA = new HashSet<>(Arrays.asList("LEIA"));
     public static final Set<String> FIRST_PONTO_E_VIRGULA = new HashSet<>(Arrays.asList("PONTO_E_VIRGULA"));
     public static final Set<String> FIRST_PROGRAMA = new HashSet<>(Arrays.asList("FUNCAO"));
     public static final Set<String> FIRST_BLOCO = new HashSet<>(Arrays.asList("INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO", "IDENTIFICADOR", "SE", "ENQUANTO", "PARA", "FUNCAO", "ESCREVA", "EXECUTE", "EOF"));

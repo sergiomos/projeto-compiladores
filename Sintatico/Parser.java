@@ -59,7 +59,7 @@ public class Parser {
     }
 
     private void header() {
-        System.out.println("fn main() {");
+        System.out.println("fn main() {\nuse std::io::{stdin,stdout,Write}");
     }
 
     private void footer() {
@@ -147,6 +147,8 @@ public class Parser {
                 return FirstFollowSets.FIRST_OP_ATRIB.contains(token);
             case "PONTO_E_VIRGULA":
                 return FirstFollowSets.FIRST_PONTO_E_VIRGULA.contains(token);
+            case "LEIA":
+                return FirstFollowSets.FIRST_LEIA.contains(token);
             default:
                 return false;
         }

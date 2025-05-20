@@ -1,4 +1,4 @@
-int idade = 25
+int idade = 25;
 dec altura = 1.75;
 texto nome = "João";
 bool ativo = verdade;

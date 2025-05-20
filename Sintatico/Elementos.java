@@ -22,6 +22,17 @@ public class Elementos {
     return false;
   }
 
+  protected boolean id(Node father, String newCode) {
+    Node newFather = new Node("IDENTIFICADOR");
+
+    if (parser.matcher.matchT("IDENTIFICADOR", newCode, newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    return false;
+  }
+
   protected boolean fimDeLinha(Node father) {
     Node newFather = new Node("FIM_DE_LINHA");
 
