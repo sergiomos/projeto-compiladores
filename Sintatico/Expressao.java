@@ -8,8 +8,11 @@ public class Expressao {
   }
 
   protected boolean expressao(Node father) {
-    Node newFather = new Node("EXPRESSAO");
+    if (!parser.isInFirstSet("EXPRESSAO", parser.currentToken.getType())) {
+      return false;
+    }
 
+    Node newFather = new Node("EXPRESSAO");
     if (operacao_matematica(newFather)
         || expressaoLogica(newFather)
         || valor(newFather)) {
@@ -21,15 +24,23 @@ public class Expressao {
   }
 
   protected boolean expressaoLogica(Node father) {
+    if (!parser.isInFirstSet("EXPRESSAO_LOGICA", parser.currentToken.getType())) {
+      return false;
+    }
+
     Node newFather = new Node("EXPRESSAO_LOGICA");
 
-    if ((parser.elementos.id(newFather) && expressaoLogicaL(newFather))
-        || (parser.elementos.numero(newFather) && expressaoLogicaL(newFather))
-        || (parser.elementos.boolean_valor(newFather) && expressaoLogicaL(newFather))
-        || (parser.elementos.texto(newFather) && expressaoLogicaL(newFather))
-        || (parser.matcher.matchL("(", "(", newFather) && expressaoLogica(newFather)
-            && parser.matcher.matchL(")", ")", newFather))) {
+    // Handle parenthesized expressions
+    if (parser.matcher.matchL("(", "(", newFather)) {
+      if (expressaoLogica(newFather) && parser.matcher.matchL(")", ")", newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
+    }
 
+    // Handle simple expressions
+    if (valor(newFather) && expressaoLogicaL(newFather)) {
       father.addNode(newFather);
       return true;
     }
@@ -40,23 +51,29 @@ public class Expressao {
   protected boolean expressaoLogicaL(Node father) {
     Node newFather = new Node("EXPRESSAO_LOGICA_L");
 
-    if ((parser.elementos.operadorAritmetico(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
-        || (parser.elementos.operadorRelacional(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
-        || (parser.elementos.operadorLogico(newFather) && expressaoLogica(newFather) && expressaoLogicaL(newFather))
-        || true) {
-      father.addNode(newFather);
-
-      return true;
+    // Check for operators
+    if (parser.elementos.operadorAritmetico(newFather) 
+        || parser.elementos.operadorRelacional(newFather)
+        || parser.elementos.operadorLogico(newFather)) {
+      if (expressaoLogica(newFather) && expressaoLogicaL(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
     }
 
-    return false;
+    // Empty expression (epsilon)
+    father.addNode(newFather);
+    return true;
   }
 
   protected boolean operacao_matematica(Node father) {
-    Node newFather = new Node("OPERACAO_MAT");
+    if (!parser.isInFirstSet("OPERACAO_MATEMATICA", parser.currentToken.getType())) {
+      return false;
+    }
 
-    if (termo(newFather)
-        && expr_mat(newFather)) {
+    Node newFather = new Node("OPERACAO_MAT");
+    if (termo(newFather) && expr_mat(newFather)) {
       father.addNode(newFather);
       return true;
     }
@@ -67,25 +84,36 @@ public class Expressao {
   protected boolean expr_mat(Node father) {
     Node newFather = new Node("EXPR_MAT");
 
-    if ((parser.matcher.matchL("+", "+", newFather)
-        && termo(newFather)
-        && expr_mat(newFather))
-        || (parser.matcher.matchL("-", "-", newFather)
-            && termo(newFather)
-            && expr_mat(newFather))
-        || true) {
-      father.addNode(newFather);
-      return true;
+    // Check for addition
+    if (parser.matcher.matchL("+", "+", newFather)) {
+      if (termo(newFather) && expr_mat(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
     }
 
-    return false;
+    // Check for subtraction
+    if (parser.matcher.matchL("-", "-", newFather)) {
+      if (termo(newFather) && expr_mat(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
+    }
+
+    // Empty expression (epsilon)
+    father.addNode(newFather);
+    return true;
   }
 
   protected boolean termo(Node father) {
-    Node newFather = new Node("TERMO");
+    if (!parser.isInFirstSet("TERMO", parser.currentToken.getType())) {
+      return false;
+    }
 
-    if (fator(newFather)
-        && termo_linha(newFather)) {
+    Node newFather = new Node("TERMO");
+    if (fator(newFather) && termo_linha(newFather)) {
       father.addNode(newFather);
       return true;
     }
@@ -96,28 +124,47 @@ public class Expressao {
   protected boolean termo_linha(Node father) {
     Node newFather = new Node("TERMO_LINHA");
 
-    if ((parser.matcher.matchL("*", "*", newFather)
-        && fator(newFather)
-        && termo_linha(newFather))
-        || ((parser.matcher.matchL("/", "/", newFather)
-            && fator(newFather)
-            && termo_linha(newFather)))
-        || true) {
-      father.addNode(newFather);
-      return true;
+    // Check for multiplication
+    if (parser.matcher.matchL("*", "*", newFather)) {
+      if (fator(newFather) && termo_linha(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
     }
 
-    return false;
+    // Check for division
+    if (parser.matcher.matchL("/", "/", newFather)) {
+      if (fator(newFather) && termo_linha(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
+    }
+
+    // Empty expression (epsilon)
+    father.addNode(newFather);
+    return true;
   }
 
   protected boolean fator(Node father) {
+    if (!parser.isInFirstSet("FATOR", parser.currentToken.getType())) {
+      return false;
+    }
+
     Node newFather = new Node("FATOR");
 
-    if (parser.elementos.numero(newFather)
-        || parser.elementos.id(newFather)
-        || ((parser.matcher.matchL("(", "(", newFather)
-            && operacao_matematica(newFather)
-            && parser.matcher.matchL(")", ")", newFather)))) {
+    // Handle parenthesized expressions
+    if (parser.matcher.matchL("(", "(", newFather)) {
+      if (operacao_matematica(newFather) && parser.matcher.matchL(")", ")", newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
+    }
+
+    // Handle simple values
+    if (parser.elementos.numero(newFather) || parser.elementos.id(newFather)) {
       father.addNode(newFather);
       return true;
     }
@@ -126,8 +173,11 @@ public class Expressao {
   }
 
   protected boolean valor(Node father) {
-    Node newFather = new Node("VALOR");
+    if (!parser.isInFirstSet("VALOR", parser.currentToken.getType())) {
+      return false;
+    }
 
+    Node newFather = new Node("VALOR");
     if (parser.elementos.numero(newFather)
         || parser.elementos.id(newFather)
         || parser.elementos.boolean_valor(newFather)
@@ -138,5 +188,4 @@ public class Expressao {
 
     return false;
   }
-
 }

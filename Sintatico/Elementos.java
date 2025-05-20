@@ -8,40 +8,39 @@ public class Elementos {
   }
 
   protected boolean id(Node father) {
-    Node newFather = new Node("IDENTIFICADOR");
-
-    if (parser.isInFirstSet("ID", parser.currentToken.getType())) {
-      if (parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema(), newFather)) {
-        father.addNode(newFather);
-        return true;
-      }
-
-      parser.error("identificador invalido -> " + parser.currentToken.getLexema());
+    if (!parser.isInFirstSet("ID", parser.currentToken.getType())) {
+      return false;
     }
 
+    Node newFather = new Node("IDENTIFICADOR");
+    if (parser.matcher.matchT("IDENTIFICADOR", parser.currentToken.getLexema(), newFather)) {
+      father.addNode(newFather);
+      return true;
+    }
+
+    parser.error("identificador invalido -> " + parser.currentToken.getLexema());
     return false;
   }
 
   protected boolean id(Node father, String newCode) {
     Node newFather = new Node("IDENTIFICADOR");
-
     if (parser.matcher.matchT("IDENTIFICADOR", newCode, newFather)) {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean fimDeLinha(Node father) {
-    Node newFather = new Node("FIM_DE_LINHA");
+    if (!parser.isInFirstSet("PONTO_E_VIRGULA", parser.currentToken.getType())) {
+      parser.error("Adicione um ponto e virgula antes de -> " + parser.currentToken.getLexema());
+      return false;
+    }
 
-    if (parser.isInFirstSet("PONTO_E_VIRGULA", parser.currentToken.getType())) {
-      if (parser.matcher.matchL(";", "\n", newFather) ) {
-        father.addNode(newFather);
-        return true;
-      }
-     
+    Node newFather = new Node("FIM_DE_LINHA");
+    if (parser.matcher.matchL(";", "\n", newFather)) {
+      father.addNode(newFather);
+      return true;
     }
 
     parser.error("Adicione um ponto e virgula antes de -> " + parser.currentToken.getLexema());
@@ -50,19 +49,16 @@ public class Elementos {
 
   protected boolean numero(Node father) {
     Node newFather = new Node("NUMERO");
-
     if (parser.matcher.matchT("INT", parser.currentToken.getLexema(), newFather) ||
         parser.matcher.matchT("FLOAT", parser.currentToken.getLexema(), newFather)) {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean tipo(Node father) {
     Node newFather = new Node("TIPO");
-
     if (parser.matcher.matchL("texto", newFather) ||
         parser.matcher.matchL("bool", newFather) ||
         parser.matcher.matchL("int", newFather) ||
@@ -70,36 +66,30 @@ public class Elementos {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean boolean_valor(Node father) {
     Node newFather = new Node("BOOLEAN_VALUE");
-
     if (parser.matcher.matchL("verdade", "true", newFather) ||
         parser.matcher.matchL("mentira", "false", newFather)) {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean texto(Node father) {
     Node newFather = new Node("STRING");
-
     if (parser.matcher.matchT("STRING", parser.currentToken.getLexema(), newFather)) {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean operadorRelacional(Node father) {
     Node newFather = new Node("OPERADOR_RELACIONAL");
-
     if (parser.matcher.matchL("<", " < ", newFather) ||
         parser.matcher.matchL(">", " > ", newFather) ||
         parser.matcher.matchL("<=", " <= ", newFather) ||
@@ -109,25 +99,21 @@ public class Elementos {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean operadorLogico(Node father) {
     Node newFather = new Node("OPERADOR_LOGICO");
-
     if (parser.matcher.matchT("E_LOGICO", "&& ", newFather) ||
         parser.matcher.matchT("OU_LOGICO", "|| ", newFather)) {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
 
   protected boolean operadorAritmetico(Node father) {
     Node newFather = new Node("OPERADOR_ARITMETICO");
-
     if (parser.matcher.matchL("+", newFather) ||
         parser.matcher.matchL("-", newFather) ||
         parser.matcher.matchL("*", newFather) ||
@@ -135,8 +121,6 @@ public class Elementos {
       father.addNode(newFather);
       return true;
     }
-
     return false;
   }
-
 }

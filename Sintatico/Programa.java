@@ -10,12 +10,18 @@ public class Programa {
   protected boolean bloco(Node father) {
     Node newFather = new Node("BLOCO");
 
-    if ((comando(newFather) && bloco(newFather)) || true) {
-      father.addNode(newFather);
-      return true;
+    // Check if we have a command
+    if (parser.isInFirstSet("COMANDO", parser.currentToken.getType())) {
+      if (comando(newFather) && bloco(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
     }
 
-    return false;
+    // Empty block (epsilon)
+    father.addNode(newFather);
+    return true;
   }
 
   protected boolean comando(Node father) {
@@ -24,6 +30,7 @@ public class Programa {
     if (parser.variaveis.declaracao(newFather)
         || parser.variaveis.atribuicao(newFather)
         || parser.funcoes.funcao(newFather)
+        || parser.funcoes.chamadaFuncao(newFather)
         || parser.condicionais.se(newFather)
         || parser.reservado.evaluate(newFather)
         || parser.lacos.enquanto(newFather)

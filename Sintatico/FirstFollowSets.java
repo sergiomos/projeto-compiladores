@@ -19,13 +19,13 @@ public class FirstFollowSets {
     public static final Set<String> FIRST_NUM = new HashSet<>(Arrays.asList("INTEIRO", "DECI"));
     public static final Set<String> FIRST_BOOLEAN = new HashSet<>(Arrays.asList("BOOLEAN"));
     public static final Set<String> FIRST_VALOR = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO"));
-    public static final Set<String> FIRST_EXPRESSAO = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO", "ABRE_PARENTESES"));
+    public static final Set<String> FIRST_EXPRESSAO = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO", "ABRE_PARENTESES", "INT", "FLOAT", "BOOLEANO", "TEXTO"));
     public static final Set<String> FIRST_OPERACAO_MATEMATICA = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECI", "ABRE_PARENTESES"));
     public static final Set<String> FIRST_EXPR_MAT = new HashSet<>(Arrays.asList("SOMA", "SUBTRACAO", "EOF"));
     public static final Set<String> FIRST_TERMO = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "ABRE_PARENTESES"));
     public static final Set<String> FIRST_TERMO_LINHA = new HashSet<>(Arrays.asList("MULTIPLICACAO", "DIVISAO", "EOF"));
     public static final Set<String> FIRST_FATOR = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECI", "ABRE_PARENTESES"));
-    public static final Set<String> FIRST_EXPRESSAO_LOGICA = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO", "ABRE_PARENTESES"));
+    public static final Set<String> FIRST_EXPRESSAO_LOGICA = new HashSet<>(Arrays.asList("IDENTIFICADOR", "INTEIRO", "DECIMAL", "BOOLEANO", "TEXTO", "ABRE_PARENTESES", "INT", "FLOAT", "BOOLEANO", "TEXTO"));
     public static final Set<String> FIRST_EXPRESSAO_LOGICA_L = new HashSet<>(Arrays.asList("SOMA", "SUBTRACAO", "MULTIPLICACAO", "DIVISAO", "MENOR", "MAIOR", "MENOR_IGUAL", "MAIOR_IGUAL", "IGUAL", "DIFERENTE", "E_LOGICO", "OU_LOGICO", "EOF"));
     public static final Set<String> FIRST_OPERADOR_ARITIMETICO = new HashSet<>(Arrays.asList("SOMA", "SUBTRACAO", "MULTIPLICACAO", "DIVISAO"));
     public static final Set<String> FIRST_OPERADOR_RELACIONAL = new HashSet<>(Arrays.asList("MENOR", "MAIOR", "MENOR_IGUAL", "MAIOR_IGUAL", "IGUAL", "DIFERENTE"));

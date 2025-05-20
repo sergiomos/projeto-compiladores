@@ -8,8 +8,11 @@ public class Condicionais {
   }
 
   protected boolean se(Node father) {
-    Node newFather = new Node("SE");
+    if (!parser.isInFirstSet("SE", parser.currentToken.getType())) {
+      return false;
+    }
 
+    Node newFather = new Node("SE");
     if (parser.matcher.matchT("SE", "if ", newFather)
         && parser.matcher.matchL("(", "", newFather)
         && parser.expressao.expressaoLogica(newFather)
@@ -18,7 +21,6 @@ public class Condicionais {
         && parser.programa.bloco(newFather)
         && parser.matcher.matchL("}", "}", newFather)
         && seAux(newFather)) {
-
       father.addNode(newFather);
       return true;
     }
@@ -29,16 +31,35 @@ public class Condicionais {
   protected boolean seAux(Node father) {
     Node newFather = new Node("SE_AUX");
 
-    if (senao(newFather) || (senaoSe(newFather) && seAux(newFather)) || true) {
-      father.addNode(newFather);
-      return true;
+    // Check for else if
+    if (parser.isInFirstSet("SENAOSE", parser.currentToken.getType())) {
+      if (senaoSe(newFather) && seAux(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
     }
-    return false;
+
+    // Check for else
+    if (parser.isInFirstSet("SENAO", parser.currentToken.getType())) {
+      if (senao(newFather)) {
+        father.addNode(newFather);
+        return true;
+      }
+      return false;
+    }
+
+    // Empty else (epsilon)
+    father.addNode(newFather);
+    return true;
   }
 
   protected boolean senao(Node father) {
-    Node newFather = new Node("SENAO");
+    if (!parser.isInFirstSet("SENAO", parser.currentToken.getType())) {
+      return false;
+    }
 
+    Node newFather = new Node("SENAO");
     if (parser.matcher.matchT("SENAO", "else ", newFather)
         && parser.matcher.matchL("{", "{\n", newFather)
         && parser.programa.bloco(newFather)
@@ -51,8 +72,11 @@ public class Condicionais {
   }
 
   protected boolean senaoSe(Node father) {
-    Node newFather = new Node("SENAOSE");
+    if (!parser.isInFirstSet("SENAOSE", parser.currentToken.getType())) {
+      return false;
+    }
 
+    Node newFather = new Node("SENAOSE");
     if (parser.matcher.matchT("SENAOSE", "if ", newFather)
         && parser.matcher.matchL("(", "", newFather)
         && parser.expressao.expressaoLogica(newFather)
