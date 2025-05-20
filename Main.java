@@ -34,12 +34,14 @@ public class Main {
         }
 
         // Executa análise semântica
-        // Analisador semanticAnalyzer = new Analisador(tree);
-        // if (semanticAnalyzer.run()) {
-        //     System.out.println("\nAnálise semântica concluída com sucesso.");
-        // } else {
-        //     semanticAnalyzer.printErrors();
-        // }
+
+        System.out.println("--------------- ANÁLISE SEMÂNTICA ---------------");
+        Analisador semanticAnalyzer = new Analisador(tree);
+        if (semanticAnalyzer.run()) {
+            System.out.println("\nAnálise semântica concluída com sucesso.");
+        } else {
+            semanticAnalyzer.printErrors();
+        }
     }
 
     public static String readFile() throws FileNotFoundException, IOException {

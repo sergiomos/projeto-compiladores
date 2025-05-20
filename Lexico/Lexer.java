@@ -9,11 +9,13 @@ public class Lexer {
     private List<Token> tokens;
     private List<AFD> afds;
     private CharacterIterator code;
+    private int currentLine;
 
     public Lexer(String data) {
         tokens = new ArrayList<>();
         afds = new ArrayList<>();
         this.code = new StringCharacterIterator(data);
+        this.currentLine = 1;
         afds.add(new Symbols());
         afds.add(new Reserved());
         afds.add(new RelationalOperator());
@@ -27,6 +29,9 @@ public class Lexer {
 
     public void skipWhiteSpace() {
         while (code.current() == ' ' || code.current() == '\n') {
+            if (code.current() == '\n') {
+                currentLine++;
+            }
             code.next();
         }
     }
@@ -38,6 +43,7 @@ public class Lexer {
             t = searchNextToken();
             if (t == null)
                 error();
+            t.setLine(currentLine);
             tokens.add(t);
         } while (t.getType() != "EOF");
 

@@ -17,7 +17,7 @@ public class Parser {
     Lacos lacos;
     Tree tree;
     Node root;
-        FirstFollowSets firstFollowSets;
+    FirstFollowSets firstFollowSets;
 
     public Parser(List<Token> tokens) {
         this.tokens = tokens;

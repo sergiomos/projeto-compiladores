@@ -8,14 +8,13 @@ public class Matcher {
   }
 
   protected boolean matchL(String palavra, Node father) {
-
     if (parser.currentToken.getLexema().equals(palavra)) {
-
-      father.addNode(new Node(parser.currentToken.getLexema()));
+      Node newNode = new Node(parser.currentToken.getLexema());
+      newNode.setLine(parser.currentToken.getLine());
+      father.addNode(newNode);
       parser.currentToken = parser.getNextToken();
       return true;
     }
-
     return false;
   }
 
@@ -24,18 +23,17 @@ public class Matcher {
       traduz(newCode);
       return true;
     }
-
     return false;
   }
 
   protected boolean matchT(String type, Node father) {
     if (parser.currentToken.getType().equals(type)) {
-
-      father.addNode(new Node(parser.currentToken.getLexema()));
+      Node newNode = new Node(parser.currentToken.getLexema());
+      newNode.setLine(parser.currentToken.getLine());
+      father.addNode(newNode);
       parser.currentToken = parser.getNextToken();
       return true;
     }
-
     return false;
   }
 
@@ -44,7 +42,6 @@ public class Matcher {
       traduz(newCode);
       return true;
     }
-
     return false;
   }
 

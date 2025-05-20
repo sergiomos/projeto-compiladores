@@ -10,20 +10,25 @@ public class Node {
   List<Node> nodes;
   String enter;
   String exit;
+  Node parent;
+  int line;
 
   public Node(String nome) {
     this.nome = nome;
     nodes = new ArrayList<>();
     this.enter = "";
     this.exit = "";
+    this.line = 0;
   }
 
   public void addNode(Node newNode) {
+    newNode.parent = this;
     nodes.add(newNode);
   }
 
   public Node addNode(String nodeName) {
     Node newNode = new Node(nodeName);
+    newNode.parent = this;
     nodes.add(newNode);
     return newNode;
   }
@@ -32,6 +37,7 @@ public class Node {
     Node newNode = new Node(nodeName);
     newNode.enter = enter;
     newNode.exit = exit;
+    newNode.parent = this;
     nodes.add(newNode);
     return newNode;
   }
@@ -66,5 +72,25 @@ public class Node {
 
   public Node getNext() {
     return nodes.remove(0);
+  }
+
+  public String getName() {
+    return nome;
+  }
+
+  public List<Node> getChildren() {
+    return nodes;
+  }
+
+  public Node getParent() {
+    return parent;
+  }
+
+  public int getLine() {
+    return line;
+  }
+
+  public void setLine(int line) {
+    this.line = line;
   }
 }
