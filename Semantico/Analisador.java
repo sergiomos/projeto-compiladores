@@ -25,7 +25,8 @@ public class Analisador {
   }
 
   private void analyzeNode(Node node) {
-    if (node == null) return;
+    if (node == null)
+      return;
 
     // Update current line for error reporting
     if (node.getLine() > 0) {
@@ -69,11 +70,11 @@ public class Analisador {
         SymbolTable.VariableInfo info = symbolTable.getVariableInfo(varName);
         if (info != null) {
           errors.add(String.format("Erro na linha %d: Variável '%s' já declarada na linha %d",
-            currentLine, varName, info.getDeclarationLine()));
+              currentLine, varName, info.getDeclarationLine()));
         } else {
           SymbolTable.FunctionInfo funcInfo = symbolTable.getFunctionInfo(varName);
           errors.add(String.format("Erro na linha %d: Nome '%s' já usado como função na linha %d",
-            currentLine, varName, funcInfo.getDeclarationLine()));
+              currentLine, varName, funcInfo.getDeclarationLine()));
         }
       } else {
         symbolTable.declareVariable(varName, type, currentLine);
@@ -97,11 +98,11 @@ public class Analisador {
         SymbolTable.VariableInfo varInfo = symbolTable.getVariableInfo(funcName);
         if (varInfo != null) {
           errors.add(String.format("Erro na linha %d: Nome '%s' já usado como variável na linha %d",
-            currentLine, funcName, varInfo.getDeclarationLine()));
+              currentLine, funcName, varInfo.getDeclarationLine()));
         } else {
           SymbolTable.FunctionInfo funcInfo = symbolTable.getFunctionInfo(funcName);
           errors.add(String.format("Erro na linha %d: Função '%s' já declarada na linha %d",
-            currentLine, funcName, funcInfo.getDeclarationLine()));
+              currentLine, funcName, funcInfo.getDeclarationLine()));
         }
       } else {
         symbolTable.declareFunction(funcName, currentLine);
@@ -111,7 +112,7 @@ public class Analisador {
 
   private void handleIdentifier(Node identifierNode) {
     String varName = identifierNode.getChildren().get(0).getName();
-    
+
     // Check if variable is used in a declaration (skip check)
     Node parent = identifierNode.getParent();
     if (parent != null && (parent.getName().equals("DECLARACAO") || parent.getName().equals("FUNCAO"))) {
@@ -121,7 +122,7 @@ public class Analisador {
     // Check if variable or function is declared before use
     if (!symbolTable.isDeclared(varName)) {
       errors.add(String.format("Erro na linha %d: Identificador '%s' não declarado",
-        currentLine, varName));
+          currentLine, varName));
     }
   }
 

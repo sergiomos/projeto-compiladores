@@ -59,7 +59,7 @@ public class Parser {
     }
 
     private void header() {
-        System.out.println("fn main() {\nuse std::io::{stdin,stdout,Write}");
+        System.out.println("fn main() {\n");
     }
 
     private void footer() {
@@ -69,7 +69,7 @@ public class Parser {
     public String peekToken() {
         return matcher.toString();
     }
-    
+
     // Helper methods for predictive parsing
     protected boolean isInFirstSet(String rule, String token) {
         switch (rule) {
@@ -153,7 +153,7 @@ public class Parser {
                 return false;
         }
     }
-    
+
     protected boolean isInFollowSet(String rule, String token) {
         switch (rule) {
             case "PROGRAMA":

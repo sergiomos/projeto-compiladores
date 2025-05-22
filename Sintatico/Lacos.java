@@ -37,15 +37,15 @@ public class Lacos {
   protected boolean doWhile(Node father) {
     Node newFather = new Node("DO_WHILE");
 
-    if (parser.matcher.matchL("execute", "while (true)", newFather)
+    if (parser.matcher.matchL("execute", "while true", newFather)
         && parser.matcher.matchL("{", "{\n", newFather)
         && parser.programa.bloco(newFather)
         && parser.matcher.matchL("}", "", newFather)
-        && parser.matcher.matchT("ENQUANTO", "if", newFather)
+        && parser.matcher.matchT("ENQUANTO", "if ", newFather)
         && parser.matcher.matchL("(", "", newFather)
         && parser.expressao.expressaoLogica(newFather)
         && parser.matcher.matchL(")", "", newFather)) {
-      parser.matcher.traduz(" {}\n else {\nbreak}}");
+      parser.matcher.traduz(" {}\n else {\nbreak}}\n");
       father.addNode(newFather);
       return true;
     }

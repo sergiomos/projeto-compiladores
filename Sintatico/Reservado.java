@@ -15,7 +15,7 @@ public class Reservado {
     Node newFather = new Node("ESCREVA");
 
     if (parser.matcher.matchT("ESCREVA", "println!", newFather)
-        && parser.matcher.matchL("(", "(", newFather)
+        && parser.matcher.matchL("(", "(\"{}\",", newFather)
         && parser.funcoes.argumentos(newFather)
         && parser.matcher.matchL(")", ")", newFather)
         && parser.elementos.fimDeLinha(newFather)) {
@@ -29,12 +29,12 @@ public class Reservado {
   protected boolean leia(Node father) {
     Node newFather = new Node("LEIA");
 
-    if(parser.isInFirstSet("LEIA", parser.currentToken.getType())){
-    if (parser.matcher.matchT("LEIA", "std::io::stdin().read_line", newFather)
-        && parser.matcher.matchL("(", "(", newFather)
-        && parser.elementos.id(newFather, "&" + parser.currentToken.getLexema())
-        && parser.matcher.matchL(")", ")", newFather)
-        && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)) {
+    if (parser.isInFirstSet("LEIA", parser.currentToken.getType())) {
+      if (parser.matcher.matchT("LEIA", "std::io::stdin().read_line", newFather)
+          && parser.matcher.matchL("(", "(", newFather)
+          && parser.elementos.id(newFather, "&" + parser.currentToken.getLexema())
+          && parser.matcher.matchL(")", ")", newFather)
+          && parser.matcher.matchL(";", ".expect(\"Failed to read line\");\n", newFather)) {
         father.addNode(newFather);
         return true;
       }

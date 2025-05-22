@@ -37,11 +37,11 @@ public class Elementos {
     Node newFather = new Node("FIM_DE_LINHA");
 
     if (parser.isInFirstSet("PONTO_E_VIRGULA", parser.currentToken.getType())) {
-      if (parser.matcher.matchL(";", "\n", newFather) ) {
+      if (parser.matcher.matchL(";", ";\n", newFather)) {
         father.addNode(newFather);
         return true;
       }
-     
+
     }
 
     parser.error("Adicione um ponto e virgula antes de -> " + parser.currentToken.getLexema());

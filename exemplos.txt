@@ -1,0 +1,43 @@
+int idade = 25;
+dec altura = 1.75;
+texto nome = "João";
+bool ativo = verdade;
+idade += 5;
+int contador = 0;
+contador++;
+
+int resultado = (10 + 5) * 2;
+dec nota1 = 10;
+dec nota2 = 5;
+dec media = (nota1 + nota2) / 2;
+
+int valor1 = 2;
+int valor2 = 4;
+int valor3 = 54;
+int total = valor1 * valor2 + valor3;
+
+texto status = "";
+se (idade >= 18) {
+    status = "maior de idade";
+} senaose (idade >= 12) {
+    status = "adolescente";
+} senao {
+    status = "criança";
+}
+
+execute {
+
+} enquanto(2 > 0)
+
+enquanto (contador < 10) {
+    contador++;
+
+    se(2 > 0){
+        
+    }
+}
+
+texto a = "";
+texto c = "";
+
+escreva("a");
