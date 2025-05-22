@@ -53,7 +53,7 @@ public class Condicionais {
   protected boolean senaoSe(Node father) {
     Node newFather = new Node("SENAOSE");
 
-    if (parser.matcher.matchT("SENAOSE", "if ", newFather)
+    if (parser.matcher.matchT("SENAOSE", "else if ", newFather)
         && parser.matcher.matchL("(", "", newFather)
         && parser.expressao.expressaoLogica(newFather)
         && parser.matcher.matchL(")", "", newFather)

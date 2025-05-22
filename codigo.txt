@@ -9,3 +9,16 @@ enquanto(contador <= 20){
     escreva(contador);
     contador++;
 }
+
+int anos = 18;
+
+texto mut status = "";
+se (anos >= 18) {
+    status = "maior de idade";
+} senaose (anos >= 12) {
+    status = "adolescente";
+} senao {
+    status = "criança";
+}
+
+escreva(status);
